@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Air Quality</h4>
+    </div>
+    <div class="card-body" *ngIf="!airPollution">
+        <p>No air quality data available.</p>
+    </div>
+    <div class="card-body" *ngIf="airPollution">
+        <p><strong>AQI:</strong> {{ airPollution().aqi }}</p>
+        <p><strong>CO:</strong> {{ airPollution().co | number:'1.2-2' }}</p>
+        <p><strong>O₃:</strong> {{ airPollution().o3 | number:'1.2-2' }}</p>
+        <p><strong>NO₂:</strong> {{ airPollution().no2 | number:'1.2-2' }}</p>
+        <p><strong>SO₂:</strong> {{ airPollution().so2 | number:'1.2-2' }}</p>
+        <p><strong>PM2.5:</strong> {{ airPollution().pm2_5 | number:'1.2-2' }}</p>
+    </div>
+</div>

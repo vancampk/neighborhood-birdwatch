@@ -1,0 +1,29 @@
+<div class="page-container">
+    <div>
+        <h4>Station Details</h4>
+    </div>
+    <div *ngIf="!station()">
+        <p>No station data available.</p>
+    </div>
+    <div class="station-info">
+        <div class="data-point">
+            <strong>Name:</strong>
+            <p>{{ station().name }}</p>
+        </div>
+        <div class="data-point" *ngIf="station().location">
+            <strong>Location:</strong>
+            <p>{{ station().location }}</p>
+        </div>
+        <div class="data-point" *ngIf="station().type">
+            <strong>Type:</strong>
+            <p>{{ station().type }}</p>
+        </div>
+        <div class="data-point" *ngIf="station().coords">
+            <strong>Coordinates:</strong>
+            <p>
+                Lat: {{ station().coords.lat | number:'1.2-2' }} /
+                Lon: {{ station().coords.lon | number:'1.2-2' }}
+            </p>
+        </div>
+    </div>
+</div>

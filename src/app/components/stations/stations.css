@@ -1,0 +1,13 @@
+.station-grid { 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center;
+  gap: 1rem;
+  
+}
+
+.station-tile {
+  background-color: var(--primary-dark);
+  width: 400px;
+  text-align: start;
+}

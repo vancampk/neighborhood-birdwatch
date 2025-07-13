@@ -1,0 +1,38 @@
+<div class="page-container">
+  <h2>Nearby Stations</h2>
+
+  <div *ngIf="loadingMessage" class="loading-indicator">
+    <h3>{{ loadingMessage }}</h3>
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    <p>{{ error }}</p>
+    <button (click)="fetchNearbyStations()">Retry</button>
+  </div>
+
+  <div *ngIf="!loadingMessage && nearbyStations.length > 0">
+    <div class="station-grid">
+      <mat-card *ngFor="let station of nearbyStations" class="station-tile">
+        <mat-card-header>
+          <mat-card-title>{{ station.name.trim() }}</mat-card-title>
+          <mat-card-subtitle>Distance: {{getStationDistance(station) | number:'1.1-1'}} mi</mat-card-subtitle>
+
+        </mat-card-header>
+        <mat-card-content>
+
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button class="secondary-button" type="button" matButton="elevated"
+            [routerLink]="['/station', station.id]">Learn More</button>
+        </mat-card-actions>
+
+      </mat-card>
+    </div>
+  </div>
+
+  <div *ngIf="!loadingMessage && !error && nearbyStations.length === 0">
+    <p>No nearby stations found.</p>
+  </div>
+
+</div>

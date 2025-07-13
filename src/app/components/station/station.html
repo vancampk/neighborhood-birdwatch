@@ -1,0 +1,27 @@
+<button class="primary-button" type="button" matButton="elevated" routerLink="/stations"> &larr; Back to Stations</button>
+<div class="page-container">
+ 
+  <h2>Station Info</h2>
+
+
+  <div *ngIf="loadingMessage" class="loading-indicator">
+    <h3>{{ loadingMessage }}</h3>
+    <div class="spinner"></div>    
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    <p>{{ error }}</p>
+    <button (click)="fetchDetections()">Retry</button>
+  </div>
+  
+  <mat-card *ngIf="station" class="station">
+      <!-- General Info Card -->
+       <station-details [station]="station"></station-details>   
+
+    <!-- Weather Card -->
+     <station-weather [weather]="weather"></station-weather>
+
+    <!-- Air Pollution Card -->
+    <!-- <station-air-pollution [airPollution]="station.airPollution"></station-air-pollution> -->
+  </mat-card>
+</div>

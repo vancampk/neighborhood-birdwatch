@@ -1,0 +1,38 @@
+<div class="page-container">
+    <div>
+      <h4>Current Weather</h4>
+    </div>
+    <div *ngIf="!weather()">
+      <p>No weather data available.</p>
+    </div>
+    <div class="weather-info" *ngIf="weather()">
+      <div class="data-point">
+        <strong>Temperature</strong>
+        <p>{{ weather().temp | number:'1.0-0' }}°</p>
+      </div>
+      <div class="data-point">
+        <strong>Humidity</strong>
+        <p>{{ weather().humidity }}%</p>
+      </div>
+      <div class="data-point">
+        <strong>Rain (in)</strong>
+        <p>{{ weather().rain }}</p>
+      </div>
+      <div class="data-point">
+        <strong>Cloud Cover</strong>
+        <p>{{ weather().cloudCover }}</p>
+      </div>
+      <div class="data-point">
+        <strong>Wind Speed (mph)</strong>
+        <p>{{ weather().windSpeed | number:'1.2-2'}}</p>
+      </div>
+      <div class="data-point">
+        <strong>Wind Direction</strong>
+        <p> {{ weather().windDir }}</p>
+      </div>
+      <div class="data-point">
+        <strong>Pressure (hPa)</strong>
+        <p>{{ weather().pressure | number:'1.2-2'}} hPa</p>
+      </div>
+    </div>
+</div>
