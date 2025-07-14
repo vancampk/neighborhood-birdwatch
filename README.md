@@ -2,7 +2,7 @@
 
 This project ties into the [Bird Weather API](https://app.birdweather.com/api) to bring you information about local bird weather stations near you. 
 
-More information about [BirdWeahter here](https://www.birdweather.com/about).
+More information about [BirdWeather here](https://www.birdweather.com/about).
 
 ## Angular Information
 

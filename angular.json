@@ -24,6 +24,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "baseHref": "/neighborhood-birdwatch/",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
@@ -43,6 +44,8 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/neighborhood-birdwatch/",
+              "outputPath": "dist/bird-watcher-app-prod",
               "budgets": [
                 {
                   "type": "initial",
@@ -65,6 +68,12 @@
           },
           "defaultConfiguration": "production"
         },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/neighborhood-birdwatch/"
+          }
+        },
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {
@@ -79,7 +88,7 @@
           "options": {
             "ssl": true,
             "sslCert": "C:/Users/vanca/localhost+2.pem",
-            "sslKey": "C:/Users/vanca/localhost+2-key.pem"          
+            "sslKey": "C:/Users/vanca/localhost+2-key.pem"
           }
         },
         "extract-i18n": {
@@ -106,7 +115,7 @@
             ]
           }
         }
-      }
+      },
     }
   }
 }
