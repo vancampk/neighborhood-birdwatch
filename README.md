@@ -1,5 +1,11 @@
 # BirdWatcherApp
 
+This project ties into the [Bird Weather API](https://app.birdweather.com/api) to bring you information about local bird weather stations near you. 
+
+More information about [BirdWeahter here](https://www.birdweather.com/about).
+
+## Angular Information
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.3.
 
 ## Development server
