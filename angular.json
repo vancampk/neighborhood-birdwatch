@@ -71,7 +71,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "/neighborhood-birdwatch/"
+            "baseHref": "https://vancampk.github.io/neighborhood-birdwatch/"
           }
         },
         "serve": {
