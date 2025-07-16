@@ -1,7 +1,7 @@
-import { WeatherReading } from 'src/app/models/station.model';
 import { Component, OnInit, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { OpenMeteoWeatherReading } from 'src/app/models/open-meteo.model';
 
 @Component({
   selector: 'station-weather',
@@ -11,5 +11,5 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [CommonModule, FontAwesomeModule],
 })
 export class WeatherComponent {
-  weather = input.required<WeatherReading>();
+  weather = input.required<OpenMeteoWeatherReading>();
 }

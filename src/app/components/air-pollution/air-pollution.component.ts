@@ -1,4 +1,4 @@
-import { AirPollution as AirPollutionModel } from 'src/app/models/station.model';
+import { AirPollutionReading as AirPollutionModel } from 'src/app/models/graphql.models';
 import { Component, OnInit, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 

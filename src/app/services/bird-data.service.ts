@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, map, BehaviorSubject, of, tap } from 'rxjs';
 import { Apollo } from 'apollo-angular';
-import { Station, GET_NEARBY_STATIONS, GET_STATION_BY_ID } from '../models/station.model';
-import { Detections, GET_DETECTIONS_FOR_STATION } from '../models/station-detection.model';
+import {  GET_DETECTIONS_FOR_STATION, GET_NEARBY_STATIONS, GET_STATION_BY_ID } from '../queries/graphql.queries';
+import { Station, DetectionConnection } from '../models/graphql.models';
 
 @Injectable({
   providedIn: 'root'
@@ -62,9 +62,9 @@ export class BirdDataService {
   }
 
 
-  getDetectionsForStation(stationId: number): Observable<Detections> {
+  getDetectionsForStation(stationId: number): Observable<DetectionConnection> {
     console.log("Getting Detections for Station: " + stationId);
-    return this.apollo.watchQuery<Detections>({
+    return this.apollo.watchQuery<DetectionConnection>({
       query: GET_DETECTIONS_FOR_STATION,
       variables: {
         stationIds : [stationId],

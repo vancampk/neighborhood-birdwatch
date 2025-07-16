@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "private": true,
   "dependencies": {
@@ -23,7 +24,6 @@
     "angular-fontawesome": "^1.0.0",
     "apollo-angular": "^11.0.0",
     "date-fns": "^4.1.0",
-    "graphql": "^16",
     "openmeteo": "^1.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -33,8 +33,13 @@
     "@angular/build": "^20.0.3",
     "@angular/cli": "^20.0.3",
     "@angular/compiler-cli": "^20.0.0",
+    "@graphql-codegen/cli": "5.0.7",
+    "@graphql-codegen/typescript": "^4.1.6",
+    "@graphql-codegen/typescript-apollo-angular": "4.0.1",
+    "@graphql-codegen/typescript-resolvers": "^4.5.1",
     "@types/jasmine": "~5.1.0",
     "angular-cli-ghpages": "^2.0.3",
+    "graphql": "^16.11.0",
     "jasmine-core": "~5.7.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

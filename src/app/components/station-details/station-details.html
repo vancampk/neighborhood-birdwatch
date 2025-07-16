@@ -21,8 +21,8 @@
         <div class="data-point" *ngIf="station().coords">
             <strong>Coordinates:</strong>
             <p>
-                Lat: {{ station().coords.lat | number:'1.2-2' }} /
-                Lon: {{ station().coords.lon | number:'1.2-2' }}
+                Lat: {{ station()!.coords!.lat | number:'1.2-2' }} /
+                Lon: {{ station()!.coords!.lon | number:'1.2-2' }}
             </p>
         </div>
     </div>

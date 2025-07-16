@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BirdDataService } from '../../services/bird-data.service';
-import { Station } from '../../models/station.model';
+import { Station } from 'src/app/models/graphql.models';
 import { Subscription } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common'
@@ -40,7 +40,7 @@ export class StationsComponent implements OnInit, OnDestroy {
   }
 
   getStationDistance(station: Station): number {
-    return this.locationService.distanceInMilesBetweenEarthCoordinates(station.coords.lat, station.coords.lon);
+    return this.locationService.distanceInMilesBetweenEarthCoordinates(station.coords!.lat, station.coords!.lon);
   }
 
   userLocation(): GeolocationCoordinates | null {

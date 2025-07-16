@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { fetchWeatherApi } from 'openmeteo';
-import { WeatherReading } from 'src/app/models/station.model';
+import { OpenMeteoWeatherReading } from '../models/open-meteo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { WeatherReading } from 'src/app/models/station.model';
 export class WeatherService {
 
     //https://open-meteo.com/en/docs/historical-weather-api?hourly=temperature_2m,rain,relative_humidity_2m,surface_pressure,cloud_cover,wind_speed_100m,wind_direction_100m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch#location_and_time
-    async getWeatherData(latitude: number, longitude: number, time: string): Promise<WeatherReading> {
+    async getWeatherData(latitude: number, longitude: number, time: string): Promise<OpenMeteoWeatherReading> {
         const params = {
             "latitude": latitude,
             "longitude": longitude,
@@ -41,15 +41,15 @@ export class WeatherService {
         const windDirection100m = hourly.variables(6)!.valuesArray()!;
 
         // create/return WeatherReading
-        const weatherReading: WeatherReading = {
+        const weatherReading: OpenMeteoWeatherReading = {
             temp: temperature2m[hour],
             rain: rain[hour],
             humidity: relativeHumidity2m[hour],
             pressure: surfacePressure[hour],
-            cloudCover: cloudCover[hour],
+            cloudiness: cloudCover[hour],
             windSpeed: windSpeed100m[hour],
-            windDirDegrees: windDirection100m[hour],
-            windDir: this.convertWindDirection(windDirection100m[hour]),
+            windDir: windDirection100m[hour],
+            windDirCompass: this.convertWindDirection(windDirection100m[hour]),
             description: `Temp: ${temperature2m[hour].toFixed(1)}°F, Humidity: ${relativeHumidity2m[hour]}%`
         };
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BirdDataService } from '../../services/bird-data.service';
-import { Detections, BirdDetection } from '../../models/station-detection.model';
-import { Station, WeatherReading } from 'src/app/models/station.model';
+import { Detection } from 'src/app/models/graphql.models';
+import { Station, WeatherReading } from 'src/app/models/graphql.models';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WeatherComponent } from '../weather/weather';
@@ -11,6 +11,7 @@ import { StationDetails } from "../station-details/station-details";
 import { MatCardModule } from '@angular/material/card';
 import { WeatherService } from 'src/app/services/weather.service';
 import { MatButtonModule } from '@angular/material/button';
+import { OpenMeteoWeatherReading } from 'src/app/models/open-meteo.model';
 
 @Component({
     selector: 'app-station-detections',
@@ -27,13 +28,12 @@ import { MatButtonModule } from '@angular/material/button';
     ],
 })
 export class StationDetectionsComponent implements OnInit {
-    detections: Detections | null = null;
-    birdDetections: BirdDetection[] = [];
+    detections: Detection | null = null;
     loadingMessage: string = '';
     error: string = '';
     stationId: number | null = null;
     station: Station | null = null;
-    weather!: WeatherReading;
+    weather!: OpenMeteoWeatherReading;
 
 
     constructor(
@@ -86,7 +86,7 @@ export class StationDetectionsComponent implements OnInit {
             // get now date
             var date = new Date().toISOString();
 
-            this.weatherService.getWeatherData(this.station.coords.lat, this.station.coords.lon, date).then(data => {
+            this.weatherService.getWeatherData(this.station.coords!.lat, this.station.coords!.lon, date).then(data => {
                 this.weather = data;
             });
                 ;

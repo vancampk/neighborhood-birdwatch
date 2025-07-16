@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BirdDetection } from '../../models/station-detection.model';
+import { Detection  } from 'src/app/models/graphql.models';
 
 @Component({
   selector: 'bird-detection',
@@ -8,6 +8,6 @@ import { BirdDetection } from '../../models/station-detection.model';
   styleUrl: './bird-detection.css'
 })
 export class BirdDetectionComponent {
- @Input() detection!: BirdDetection;  
+ @Input() detection!: Detection;  
 
 }

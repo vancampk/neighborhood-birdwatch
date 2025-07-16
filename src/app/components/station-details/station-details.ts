@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Station } from 'src/app/models/station.model';
+import { Station } from 'src/app/models/graphql.models';
 
 @Component({
   selector: 'station-details',
