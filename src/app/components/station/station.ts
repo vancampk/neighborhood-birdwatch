@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BirdDataService } from '../../services/bird-data.service';
 import { Detection } from 'src/app/models/graphql.models';
-import { Station, WeatherReading } from 'src/app/models/graphql.models';
+import { Station } from 'src/app/models/graphql.models';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { WeatherComponent } from '../weather/weather';
-import { AirPollutionComponent } from "../air-pollution/air-pollution.component";
 import { StationDetails } from "../station-details/station-details";
 import { MatCardModule } from '@angular/material/card';
 import { WeatherService } from 'src/app/services/weather.service';
 import { MatButtonModule } from '@angular/material/button';
 import { OpenMeteoWeatherReading } from 'src/app/models/open-meteo.model';
+import { LiveDetectionsComponent } from '../live-detection/live-detection';
 
 @Component({
     selector: 'app-station-detections',
@@ -21,7 +21,7 @@ import { OpenMeteoWeatherReading } from 'src/app/models/open-meteo.model';
         CommonModule,
         RouterLink,
         WeatherComponent,
-        AirPollutionComponent,
+        LiveDetectionsComponent,
         StationDetails,
         MatCardModule,
         MatButtonModule
@@ -31,7 +31,7 @@ export class StationDetectionsComponent implements OnInit {
     detections: Detection | null = null;
     loadingMessage: string = '';
     error: string = '';
-    stationId: number | null = null;
+    stationId: number = 0;
     station: Station | null = null;
     weather!: OpenMeteoWeatherReading;
 

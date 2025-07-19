@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/src/environments/environment.ts
 /bazel-out
 
 # Node
@@ -41,3 +42,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+src/environments/environment.prod.ts

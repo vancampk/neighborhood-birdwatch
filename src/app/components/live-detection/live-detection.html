@@ -1,0 +1,14 @@
+<div class="detections-container">
+  <h2>Live Detections</h2>
+  <ul class="detection-list" *ngIf="detections.length > 0; else noDetections">
+    <li *ngFor="let detection of detections" class="detection-item">
+      <img [src]="detection.species.thumbnailUrl" [alt]="detection.species.commonName" class="species-thumbnail">
+      <div class="detection-info">
+        <h3 class="species-name">{{ detection.species.commonName }}</h3>
+        <p class="detection-time">{{ detection.timestamp | date:'shortTime' }}</p>
+        <p class="detection-confidence">Confidence: {{ (detection.confidence * 100).toFixed(0) }}%</p>
+      </div>
+    </li>
+  </ul>
+  <ng-template #noDetections><div class="no-detections">Listening for new bird detections...</div></ng-template>
+</div>

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, BehaviorSubject, of, tap } from 'rxjs';
+import { Observable, map, BehaviorSubject, of, tap, Subscription } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import {  GET_DETECTIONS_FOR_STATION, GET_NEARBY_STATIONS, GET_STATION_BY_ID } from '../queries/graphql.queries';
-import { Station, DetectionConnection } from '../models/graphql.models';
+import { Station, DetectionConnection, Detection } from '../models/graphql.models';
+import { DETECTION_SUBSCRIPTION } from '../queries/graphql.subscriptions';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,9 @@ export class BirdDataService {
   private stationsSubject = new BehaviorSubject<Station[]>([]);
   /** An observable of the station list, accessible to any component. */
   readonly stations$ = this.stationsSubject.asObservable();
-
+  private newDetectionsSubject = new BehaviorSubject<Detection[]>([]);
+  readonly newDetections$ = this.newDetectionsSubject.asObservable();
+  
   constructor(private apollo: Apollo) { }
 
   /** Returns the current value of the stations list. */
@@ -74,7 +77,20 @@ export class BirdDataService {
           count: 1
         }
       },
-    }).valueChanges.pipe(map(result => result.data ?? []));      
-    
+    }).valueChanges.pipe(map(result => result.data ?? []));
   }
+
+  subscribeToNewDetections(stationId: number): Subscription {
+    return this.apollo.subscribe<{ newDetection: { detection: Detection } }>({
+      query: DETECTION_SUBSCRIPTION,
+      variables: { stationIds: [stationId] }
+    }).pipe(
+      map(result => result.data?.newDetection?.detection),
+    ).subscribe((detection) => {
+      if (detection) {
+        this.newDetectionsSubject.next([detection]);
+      }
+    });
+  }
+
 }

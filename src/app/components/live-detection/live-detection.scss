@@ -1,0 +1,66 @@
+.detections-container {
+  max-height: 600px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.no-detections {
+  color: #888;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+}
+
+.detection-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.detection-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.3s ease;
+}
+
+.detection-item:last-child {
+  border-bottom: none;
+}
+
+.detection-item:hover {
+    background-color: #f0f0f0;
+}
+
+.species-thumbnail {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 1rem;
+  border: 2px solid #ddd;
+}
+
+.detection-info {
+  flex-grow: 1;
+}
+
+.species-name {
+  font-weight: bold;
+  margin: 0;
+}
+
+.detection-time, .detection-confidence {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #555;
+}
