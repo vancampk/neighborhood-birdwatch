@@ -1,20 +1,17 @@
-import { Injectable } from "@angular/core";
+import { Injectable, signal, WritableSignal } from "@angular/core";
 import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
-
 export class LocationService {
-    userLat: number = 0;
-    userLon: number = 0;
+    public userCoords: WritableSignal<GeolocationCoordinates | null> = signal(null);
 
-    constructor() { 
+    constructor() {
         this.getUserLocation().subscribe(coords => {
-            this.userLat = coords.latitude;
-            this.userLon = coords.longitude;
+            this.userCoords.set(coords);
         });
-     }
+    }
 
 
     getUserLocation(): Observable<GeolocationCoordinates> {
@@ -47,20 +44,39 @@ export class LocationService {
     }
 
     distanceInMilesBetweenEarthCoordinates(lat2: number, lon2: number): number {
+        const userCoords = this.userCoords();
+        if (!userCoords) {
+            return -1;
+        }
         var earthRadiusMi = 3958.7564;
 
-        var dLat = this.degreesToRadians(lat2 - this.userLat);
-        var dLon = this.degreesToRadians(lon2 - this.userLon);
+        var dLat = this.degreesToRadians(lat2 - userCoords.latitude);
+        var dLon = this.degreesToRadians(lon2 - userCoords.longitude);
 
-        var localUserLat = this.degreesToRadians(this.userLat);
+        var localUserLat = this.degreesToRadians(userCoords.latitude);
         lat2 = this.degreesToRadians(lat2);
 
         var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
             Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(localUserLat) * Math.cos(lat2);
-            console.log("a:" + a);
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    
-        console.log(earthRadiusMi * c  );
+
         return earthRadiusMi * c;
+    }
+
+    convertCoordsToDMS(lat: number, lon: number): { lat: string; lon: string } {
+        return {
+            lat: this.toDMS(lat, 'N', 'S'),
+            lon: this.toDMS(lon, 'E', 'W'),
+        };
+    }
+
+    private toDMS(coord: number, positiveDir: string, negativeDir: string): string {
+        const direction = coord >= 0 ? positiveDir : negativeDir;
+        const absolute = Math.abs(coord);
+        const degrees = Math.floor(absolute);
+        const minutesNotTruncated = (absolute - degrees) * 60;
+        const minutes = Math.floor(minutesNotTruncated);
+        const seconds = Math.floor((minutesNotTruncated - minutes) * 60);
+        return `${degrees}° ${minutes}' ${seconds}" ${direction}`;
     }
 }

@@ -1,13 +1,58 @@
-.station-info{
-    width: 100%;
+.station-details{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    padding: 10px;
 }
 
-.data-point{
-    padding:10px;
+.details-layout {
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.station-info-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.data-point {
+    padding: 10px;
+    border-radius: 4px;
+    flex-grow: 1;
+
+    strong {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+.map-container,
+.map-unavailable {
+    max-width: 50%;
+}
+
+.map-image {
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.map-unavailable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px; // Give it some height
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    color: #666;
+    border-radius: 4px;
 }

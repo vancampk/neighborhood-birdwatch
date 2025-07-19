@@ -68,6 +68,7 @@ export const GET_NEARBY_STATIONS = gql`
 export const GET_STATION_BY_ID = gql`
    query Station ($id: ID!) {
     station(id: $id) {
+        id
         name
         location
         type
