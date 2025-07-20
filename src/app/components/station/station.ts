@@ -12,23 +12,25 @@ import { WeatherService } from 'src/app/services/weather.service';
 import { MatButtonModule } from '@angular/material/button';
 import { OpenMeteoWeatherReading } from 'src/app/models/open-meteo.model';
 import { LiveDetectionsComponent } from '../live-detection/live-detection';
+import { BirdDetectionComponent } from "../bird-detection/bird-detection";
 
 @Component({
     selector: 'app-station-detections',
     templateUrl: './station.html',
     styleUrls: ['./station.css'],
     imports: [
-        CommonModule,
-        RouterLink,
-        WeatherComponent,
-        LiveDetectionsComponent,
-        StationDetails,
-        MatCardModule,
-        MatButtonModule
-    ],
+    CommonModule,
+    RouterLink,
+    WeatherComponent,
+    LiveDetectionsComponent,
+    StationDetails,
+    MatCardModule,
+    MatButtonModule,
+    BirdDetectionComponent
+],
 })
 export class StationDetectionsComponent implements OnInit {
-    detections: Detection | null = null;
+    detection: Detection | null = null;
     loadingMessage: string = '';
     error: string = '';
     stationId: number = 0;
@@ -44,10 +46,10 @@ export class StationDetectionsComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.fetchDetections();
+        this.fetchStation();
     }
 
-    fetchDetections(): void {
+    fetchStation(): void {
         const idParam = this.route.snapshot.paramMap.get('id');
         console.log(this.birdDataService.stations$);
         this.loadingMessage = 'Loading station details...';
@@ -59,7 +61,6 @@ export class StationDetectionsComponent implements OnInit {
                     if (station) {
                         this.station = station;
                         this.loadingMessage = '';
-                        this.fetchWeather();                            
                     }
                     else {
                         this.loadingMessage = '';
@@ -81,18 +82,7 @@ export class StationDetectionsComponent implements OnInit {
         }
     }
 
-    fetchWeather(): void {
-        if(this.station){
-            // get now date
-            var date = new Date().toISOString();
-
-            this.weatherService.getWeatherData(this.station.coords!.lat, this.station.coords!.lon, date).then(data => {
-                this.weather = data;
-            });
-                ;
-        }
-    }
-
+    
 
     goBackToStations(): void {
         this.router.navigate(['/']);

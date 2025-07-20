@@ -5,6 +5,7 @@ import { createClient } from 'graphql-ws';
 import { inject } from '@angular/core';
 import { InMemoryCache, split } from '@apollo/client/core';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { NgModule } from '@angular/core';
 
@@ -21,11 +22,9 @@ const wsUri = 'wss://app.birdweather.com/graphql';
       });
     
       // WebSocket link:
-      const ws = new GraphQLWsLink(
-        createClient({
-          url: wsUri,
-        }),
-      );
+      const ws = new GraphQLWsLink(createClient({
+        url: uri,
+      }));
     
       //  use split links to determine what kind of query we are sending and what should be used as the link method
       const link = split(

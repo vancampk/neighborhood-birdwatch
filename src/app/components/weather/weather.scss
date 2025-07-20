@@ -1,3 +1,10 @@
+.weather-container{
+    background-color: var(--primary-light);
+    margin: 10px;
+    opacity: 0.9;
+    border-radius: 10px;
+}
+
 .weather-info{
     width: 100%;
     display: flex;

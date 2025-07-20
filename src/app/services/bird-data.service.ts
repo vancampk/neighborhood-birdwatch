@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, map, BehaviorSubject, of, tap, Subscription } from 'rxjs';
 import { Apollo } from 'apollo-angular';
-import {  GET_DETECTIONS_FOR_STATION, GET_NEARBY_STATIONS, GET_STATION_BY_ID } from '../queries/graphql.queries';
+import {  GET_DETECTIONS_FOR_STATION, GET_LAST_DETEACTION_FOR_STATION, GET_NEARBY_STATIONS, GET_STATION_BY_ID } from '../queries/graphql.queries';
 import { Station, DetectionConnection, Detection } from '../models/graphql.models';
 import { DETECTION_SUBSCRIPTION } from '../queries/graphql.subscriptions';
 
@@ -65,25 +65,23 @@ export class BirdDataService {
   }
 
 
-  getDetectionsForStation(stationId: number): Observable<DetectionConnection> {
+  getDetectionsForStation(stationId: number, last: boolean): Observable<Detection[]> {
     console.log("Getting Detections for Station: " + stationId);
-    return this.apollo.watchQuery<DetectionConnection>({
-      query: GET_DETECTIONS_FOR_STATION,
+
+    const query = last ? GET_LAST_DETEACTION_FOR_STATION : GET_DETECTIONS_FOR_STATION;
+
+    return this.apollo.watchQuery<{ detections: DetectionConnection }>({
+      query: query,
       variables: {
         stationIds : [stationId],
-        last: 10,
-        period: {
-          unit: 'day',
-          count: 1
-        }
       },
-    }).valueChanges.pipe(map(result => result.data ?? []));
+    }).valueChanges.pipe(map(result => result.data?.detections?.nodes?.filter((d): d is Detection => d !== null) ?? []));
   }
 
   subscribeToNewDetections(stationId: number): Subscription {
     return this.apollo.subscribe<{ newDetection: { detection: Detection } }>({
       query: DETECTION_SUBSCRIPTION,
-      variables: { stationIds: [stationId] }
+      variables: { stationIds: [stationId]}
     }).pipe(
       map(result => result.data?.newDetection?.detection),
     ).subscribe((detection) => {

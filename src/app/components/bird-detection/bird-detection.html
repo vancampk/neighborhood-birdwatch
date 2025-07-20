@@ -1,17 +1,46 @@
-<div class="page-container">
-
-    <div class="bird-header">
-        <h3>{{detection.species.commonName}}</h3>
-        <h3>{{detection.species.scientificName}}</h3>
+<div class="page-container detection-container">
+    <h4>Last Detection</h4>
+    <!-- Loading -->
+    <div *ngIf="loading" class="loading-indicator">
+        <h3>{{ loadingMessage }}</h3>
+        <div class="spinner"></div>
     </div>
 
-    <div class="bird-image">
-        <img src="{{detection.species.imageUrl}}" alt="{{detection.species.commonName}}" />
+    <!-- Error -->
+    <div *ngIf="error" class="error-message">
+        <p>{{ error }}</p>
+        <button (click)="fetchLastDetection()">Retry</button>
     </div>
 
-    <div class="bird-info">        
-        <p>{{detection.species.mlUrl}}</p>        
+    <!-- No Detections -->
+    <div *ngIf="detections.length === 0 && !loading && !error">
+        <p>No detection data available.</p>
+        <button (click)="fetchLastDetection()">Retry</button>
     </div>
 
-
+    <div class="bird-info" *ngIf="detections.length > 0">
+        <div *ngFor="let detection of detections" class="detection-item">
+            <div class="species-info">
+                <img *ngIf="detection.species.imageUrl" [src]="detection.species.imageUrl"
+                    [alt]="detection.species.commonName" class="species-image">
+                <div class="species-details">
+                    <h3>{{ detection.species.commonName }}</h3>
+                    <h4 *ngIf="detection.species.scientificName"><em>{{ detection.species.scientificName }}</em></h4>
+                    <p *ngIf="detection.species.wikipediaSummary" class="summary">{{ detection.species.wikipediaSummary }}</p>
+                    <a *ngIf="detection.species.wikipediaUrl" [href]="detection.species.wikipediaUrl" target="_blank"
+                        rel="noopener noreferrer">Learn more on Wikipedia</a>
+                </div>
+            </div>
+            <div class="detection-metadata">
+                <div class="data-point">
+                    <strong>Confidence:</strong>
+                    <p>{{ detection.confidence | number:'1.0-2' }}</p>
+                </div>
+                <div class="data-point">
+                    <strong>Time:</strong>
+                    <p>{{ detection.timestamp | date:'short' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

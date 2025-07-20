@@ -45,6 +45,54 @@ export const GET_DETECTIONS_FOR_STATION = gql`
   }
 `;
 
+export const GET_LAST_DETEACTION_FOR_STATION = gql`
+  query detections($stationIds: [ID!]) {
+    detections(stationIds: $stationIds, uniqueStations: true, last:10) {
+        speciesCount
+        totalCount
+        pageInfo {
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            startCursor
+        }
+        nodes {
+            certainty
+            confidence
+            eclipse
+            favoriteUrl
+            flagUrl
+            id
+            mode
+            probability
+            score
+            speciesId
+            timestamp
+            voteUrl
+            species {
+                alpha
+                alpha6
+                birdweatherUrl
+                color
+                commonName
+                ebirdCode
+                ebirdUrl
+                id
+                imageCredit
+                imageLicense
+                imageLicenseUrl
+                imageUrl
+                mlUrl
+                scientificName
+                thumbnailUrl
+                wikipediaSummary
+                wikipediaUrl
+            }
+        }
+    }
+  }
+`;
+
 export const GET_NEARBY_STATIONS = gql`
  query stations($ne: InputLocation, $sw: InputLocation) {
     stations(ne: $ne, sw: $sw) {

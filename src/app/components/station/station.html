@@ -1,27 +1,33 @@
-<button class="primary-button" type="button" matButton="elevated" routerLink="/stations"> &larr; Back to Stations</button>
+<button class="primary-button" type="button" matButton="elevated" routerLink="/stations"> &larr; Back to
+  Stations</button>
 <div class="page-container">
- 
+
   <h2>Station Info</h2>
 
 
   <div *ngIf="loadingMessage" class="loading-indicator">
     <h3>{{ loadingMessage }}</h3>
-    <div class="spinner"></div>    
+    <div class="spinner"></div>
   </div>
 
   <div *ngIf="error" class="error-message">
     <p>{{ error }}</p>
-    <button (click)="fetchDetections()">Retry</button>
+    <button (click)="fetchStation()">Retry</button>
   </div>
-  
+
   <mat-card *ngIf="station" class="station">
-      <!-- General Info Card -->
-       <station-details [station]="station"></station-details>   
+    <!-- General Info Card -->
+    <station-details [station]="station"></station-details>
 
     <!-- Weather Card -->
-     <station-weather [weather]="weather"></station-weather>
+    <station-weather *ngIf="station.coords" [lattitude]="station.coords.lat"
+      [longitude]="station.coords.lon"></station-weather>
 
     <!--Live Detections Card -->
-    <live-detection [stationId]="stationId"></live-detection>
+    <!-- <live-detection [stationId]="stationId"></live-detection> -->
+
+    <!-- Last bird detection -->
+    <bird-detection [stationId]="stationId" [last]="true"></bird-detection>
   </mat-card>
+  
 </div>

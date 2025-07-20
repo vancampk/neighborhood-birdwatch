@@ -24,7 +24,7 @@
             <div class="data-point" *ngIf="station().coords">
                 <strong>Coordinates</strong>
                 <p *ngIf="dmsCoords()">
-                    {{ dmsCoords()!.lat }} / {{ dmsCoords()!.lon }}
+                    {{ dmsCoords()!.lat }}, {{ dmsCoords()!.lon }}
                 </p>
             </div>
             <div class="data-point" *ngIf="distance()">
