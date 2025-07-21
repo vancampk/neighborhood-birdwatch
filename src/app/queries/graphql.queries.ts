@@ -47,15 +47,9 @@ export const GET_DETECTIONS_FOR_STATION = gql`
 
 export const GET_LAST_DETEACTION_FOR_STATION = gql`
   query detections($stationIds: [ID!]) {
-    detections(stationIds: $stationIds, uniqueStations: true, last:10) {
+    detections(stationIds: $stationIds, last:5) {
         speciesCount
-        totalCount
-        pageInfo {
-            endCursor
-            hasNextPage
-            hasPreviousPage
-            startCursor
-        }
+        totalCount       
         nodes {
             certainty
             confidence
@@ -99,11 +93,7 @@ export const GET_NEARBY_STATIONS = gql`
       nodes {
         id
         name     
-        location
-        airPollution{
-          aqi
-          co
-        }        
+        location          
         coords {
           lat
           lon

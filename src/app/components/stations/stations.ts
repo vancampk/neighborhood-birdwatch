@@ -49,7 +49,7 @@ export class StationsComponent implements OnInit, OnDestroy {
 
   fetchNearbyStations(): void {
     this.error = null;
-    this.loadingMessage = 'Getting your location to find nearby stations...';
+    this.loadingMessage = 'Getting your location...';
 
     this.locationService.getUserLocation().subscribe({
       next: (coords) => {
