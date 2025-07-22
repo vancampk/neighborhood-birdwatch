@@ -1,6 +1,64 @@
-.detection-container{
+.detection-container {
     background-color: var(--primary-light);
     margin: 10px;
     opacity: 0.9;
     border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+}
+
+.detection-item {
+    display: flex;
+    flex-direction: column;        
+}
+
+.species-main-info {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+}
+
+.species-identity {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.species-image {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 8px;
+    margin: 10px;
+    box-shadow: 0 15px 20px rgba(0,0,0,0.8);
+}
+
+.species-summary {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.summary {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.detection-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 1rem;
+}
+
+.bird-name{
+    padding: 0rem;
+    margin: 0rem;
+}
+
+.bird-scientific-name{    
+    font-style: italic;
 }

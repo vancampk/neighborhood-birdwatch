@@ -11,8 +11,9 @@ import { MatCardModule } from '@angular/material/card';
 import { WeatherService } from 'src/app/services/weather.service';
 import { MatButtonModule } from '@angular/material/button';
 import { OpenMeteoWeatherReading } from 'src/app/models/open-meteo.model';
-import { LiveDetectionsComponent } from '../live-detection/live-detection';
 import { BirdDetectionComponent } from "../bird-detection/bird-detection";
+import { StationMap } from '../map/station-map';
+
 
 @Component({
     selector: 'app-station-detections',
@@ -22,11 +23,11 @@ import { BirdDetectionComponent } from "../bird-detection/bird-detection";
     CommonModule,
     RouterLink,
     WeatherComponent,
-    LiveDetectionsComponent,
     StationDetails,
     MatCardModule,
     MatButtonModule,
-    BirdDetectionComponent
+    BirdDetectionComponent,
+    StationMap
 ],
 })
 export class StationDetectionsComponent implements OnInit {

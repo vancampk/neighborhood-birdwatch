@@ -1,12 +1,13 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgxSplideModule } from 'ngx-splide';
 import { Detection } from 'src/app/models/graphql.models';
 import { BirdDataService } from 'src/app/services/bird-data.service';
 
 @Component({
   selector: 'bird-detection',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgxSplideModule],
   templateUrl: './bird-detection.html',
   styleUrl: './bird-detection.css'
 })
@@ -35,8 +36,19 @@ export class BirdDetectionComponent {
             this.error = '';
             this.birdDataService.getDetectionsForStation(this.stationId(), this.last()).subscribe({
                 next: (detections) => {
-                    console.log(detections);
-                    this.detections = detections;
+                    const latestDetectionsBySpecies = new Map<number, Detection>();
+
+                    detections.forEach((detection: Detection) => {
+                        const speciesId = parseInt(detection.species.id);
+                        const existingDetection = latestDetectionsBySpecies.get(speciesId);
+                
+                        if (!existingDetection || new Date(detection.timestamp) > new Date(existingDetection.timestamp)) {
+                            latestDetectionsBySpecies.set(speciesId, detection);
+                        }
+                    });
+
+                    this.detections = Array.from(latestDetectionsBySpecies.values())
+                        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
                     this.loading = false;
                     this.loadingMessage = '';
                 },

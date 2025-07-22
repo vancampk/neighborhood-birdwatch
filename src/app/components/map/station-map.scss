@@ -1,0 +1,22 @@
+.map-container,
+.map-unavailable {
+    max-width: 50%;
+}
+
+.map-image {
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+    padding: 10px;
+}
+
+.map-unavailable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px; // Give it some height
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    color: #666;
+    border-radius: 4px;
+}

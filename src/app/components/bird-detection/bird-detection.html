@@ -1,5 +1,6 @@
-<div class="page-container detection-container">
-    <h4>Last Detection</h4>
+<div class="detection-container">
+    <h4>Recent Species Detected</h4>
+    
     <!-- Loading -->
     <div *ngIf="loading" class="loading-indicator">
         <h3>{{ loadingMessage }}</h3>
@@ -19,28 +20,48 @@
     </div>
 
     <div class="bird-info" *ngIf="detections.length > 0">
-        <div *ngFor="let detection of detections" class="detection-item">
-            <div class="species-info">
-                <img *ngIf="detection.species.imageUrl" [src]="detection.species.imageUrl"
-                    [alt]="detection.species.commonName" class="species-image">
-                <div class="species-details">
-                    <h3>{{ detection.species.commonName }}</h3>
-                    <h4 *ngIf="detection.species.scientificName"><em>{{ detection.species.scientificName }}</em></h4>
-                    <p *ngIf="detection.species.wikipediaSummary" class="summary">{{ detection.species.wikipediaSummary }}</p>
+        <splide [options]="{ rewind: true, heightRatio : 0.3 }">
+            <splide-slide *ngFor="let detection of detections">
+              <div class="detection-item">
+                <div class="species-main-info">
+                  <div class="species-identity">
+                    <h3 class="bird-name">{{ detection.species.commonName }}</h3>
+                    <h4 class="bird-name bird-scientific-name" *ngIf="detection.species.scientificName">{{ detection.species.scientificName }}</h4>
+                    <img *ngIf="detection.species.imageUrl" [src]="detection.species.imageUrl"
+                      [alt]="detection.species.commonName" class="species-image">
+                   
+                  </div>
+                  <div class="species-summary">
+                    <p *ngIf="detection.species.wikipediaSummary" class="summary">{{
+                      detection.species.wikipediaSummary }}</p>
                     <a *ngIf="detection.species.wikipediaUrl" [href]="detection.species.wikipediaUrl" target="_blank"
-                        rel="noopener noreferrer">Learn more on Wikipedia</a>
+                      rel="noopener noreferrer">Learn more on Wikipedia</a>
+                  </div>
                 </div>
-            </div>
-            <div class="detection-metadata">
-                <div class="data-point">
-                    <strong>Confidence:</strong>
+                <div class="detection-metadata">
+                  <div class="data-point">
+                    <strong>Confidence</strong>
                     <p>{{ detection.confidence | number:'1.0-2' }}</p>
-                </div>
-                <div class="data-point">
-                    <strong>Time:</strong>
+                  </div>
+                  <div class="data-point">
+                    <strong>Score</strong>
+                    <p>{{ detection.score | number:'1.0-2' }}</p>
+                  </div>
+                  <div class="data-point">
+                    <strong>Certainty</strong>
+                    <p>{{ detection.certainty }}</p>
+                  </div>
+                  <div class="data-point">
+                    <strong>Time</strong>
                     <p>{{ detection.timestamp | date:'short' }}</p>
+                  </div>
+                  <div class="data-point">
+                    <strong>Mode</strong>
+                    <p>{{ detection.mode }}</p>
+                  </div>
                 </div>
-            </div>
-        </div>
+              </div>
+            </splide-slide>
+          </splide>
     </div>
 </div>
