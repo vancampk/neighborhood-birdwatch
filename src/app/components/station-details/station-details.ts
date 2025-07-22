@@ -1,7 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { Station } from 'src/app/models/graphql.models';
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
 import { LocationService } from 'src/app/services/location-data.service';
 import { MapStatusService } from 'src/app/services/map-status.service';
 
