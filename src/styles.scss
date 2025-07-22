@@ -98,3 +98,18 @@ button:hover {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.data-point {
+    padding: 10px;
+    border-radius: 4px;
+    flex-grow: 1;
+
+    strong {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    p {
+        margin: 0;
+    }
+}
