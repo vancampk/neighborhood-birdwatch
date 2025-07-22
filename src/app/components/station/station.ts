@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { OpenMeteoWeatherReading } from 'src/app/models/open-meteo.model';
 import { BirdDetectionComponent } from "../bird-detection/bird-detection";
 import { StationMap } from '../map/station-map';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 @Component({
@@ -27,7 +29,8 @@ import { StationMap } from '../map/station-map';
     MatCardModule,
     MatButtonModule,
     BirdDetectionComponent,
-    StationMap
+    StationMap,
+    MatIconModule
 ],
 })
 export class StationDetectionsComponent implements OnInit {

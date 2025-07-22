@@ -19,8 +19,15 @@
         <button (click)="fetchLastDetection()">Retry</button>
     </div>
 
-    <div class="bird-info" *ngIf="detections.length > 0">
-            <div ngbSlide *ngFor="let detection of detections">
+    <div *ngIf="detections.length > 0">
+        <swiper-container
+            [slidesPerView]="1"
+            [spaceBetween]="10"
+            [loop]="true"
+            [pagination]="{ clickable: true }"
+            [navigation]="true"
+            class="mySwiper">
+            <swiper-slide *ngFor="let detection of detections">
               <div class="detection-item">
                 <div class="species-main-info">
                   <div class="species-identity">
@@ -60,6 +67,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </swiper-slide>
+          </swiper-container>
     </div>
 </div>

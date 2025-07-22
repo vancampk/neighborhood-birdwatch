@@ -48,7 +48,7 @@ button:hover {
   margin: 0px 10px;
 }
 button:hover {
-  background-color: var(--secondary-dark) !important;
+  background-color: var(--secondary-light) !important;
 }
 
 // Loading
@@ -126,4 +126,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     z-index: 1000;
     background-color: var(--primary-dark) !important;
     color: white !important;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1; /* Helps normalize vertical alignment for text */
 }

@@ -1,14 +1,20 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Detection } from 'src/app/models/graphql.models';
 import { BirdDataService } from 'src/app/services/bird-data.service';
+import { register } from 'swiper/element/bundle';
+
+// register Swiper custom elements
+register();
 
 @Component({
   selector: 'bird-detection',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './bird-detection.html',
-  styleUrl: './bird-detection.css'
+  styleUrl: './bird-detection.css',
+  encapsulation: ViewEncapsulation.None,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class BirdDetectionComponent {
   stationId = input.required<number>();
