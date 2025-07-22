@@ -19,7 +19,14 @@
 .station {
   background-color: var(--primary-dark);
   width: 90%;
-  text-align: start;
+  display: flex;
+  flex-direction: column;
+  
+  
+}
+
+.station > * {  
+  padding: 10px;
 }
 
 
