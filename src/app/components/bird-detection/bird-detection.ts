@@ -1,13 +1,12 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgxSplideModule } from 'ngx-splide';
 import { Detection } from 'src/app/models/graphql.models';
 import { BirdDataService } from 'src/app/services/bird-data.service';
 
 @Component({
   selector: 'bird-detection',
   standalone: true,
-  imports: [CommonModule, NgxSplideModule],
+  imports: [CommonModule],
   templateUrl: './bird-detection.html',
   styleUrl: './bird-detection.css'
 })

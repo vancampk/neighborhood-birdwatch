@@ -8,7 +8,7 @@
 
 .detection-item {
     display: flex;
-    flex-direction: column;        
+    flex-direction: column;      
 }
 
 .species-main-info {
@@ -60,4 +60,16 @@
 
 .bird-scientific-name{    
     font-style: italic;
+}
+/* ng-bootstrap Carousel Customization */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--primary-dark);
+    border-radius: 50%;
+    padding: 1.2rem; /* Adjust padding to control icon size */
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: var(--primary-dark);
+    opacity: 0.8;
 }

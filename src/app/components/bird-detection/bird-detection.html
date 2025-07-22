@@ -20,8 +20,7 @@
     </div>
 
     <div class="bird-info" *ngIf="detections.length > 0">
-        <splide [options]="{ rewind: true, heightRatio : 0.3 }">
-            <splide-slide *ngFor="let detection of detections">
+            <div ngbSlide *ngFor="let detection of detections">
               <div class="detection-item">
                 <div class="species-main-info">
                   <div class="species-identity">
@@ -61,7 +60,6 @@
                   </div>
                 </div>
               </div>
-            </splide-slide>
-          </splide>
+            </div>
     </div>
 </div>
