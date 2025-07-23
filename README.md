@@ -4,6 +4,8 @@ This project ties into the [Bird Weather API](https://app.birdweather.com/api) t
 
 More information about [BirdWeather here](https://www.birdweather.com/about).
 
+[Demo the app here!](https://vancampk.github.io/neighborhood-birdwatch/)
+
 ## Angular Information
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.3.
