@@ -2,14 +2,11 @@
     background-color: var(--primary-light);
     opacity: 0.9;
     border-radius: 10px;
-}
-
-.details-layout {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
 

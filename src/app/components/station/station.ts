@@ -5,14 +5,12 @@ import { Detection } from 'src/app/models/graphql.models';
 import { Station } from 'src/app/models/graphql.models';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { WeatherComponent } from '../weather/weather';
 import { StationDetails } from "../station-details/station-details";
 import { MatCardModule } from '@angular/material/card';
 import { WeatherService } from 'src/app/services/weather.service';
 import { MatButtonModule } from '@angular/material/button';
 import { OpenMeteoWeatherReading } from 'src/app/models/open-meteo.model';
 import { BirdDetectionComponent } from "../bird-detection/bird-detection";
-import { StationMap } from '../map/station-map';
 import { MatIconModule } from '@angular/material/icon';
 
 
@@ -24,12 +22,10 @@ import { MatIconModule } from '@angular/material/icon';
     imports: [
     CommonModule,
     RouterLink,
-    WeatherComponent,
     StationDetails,
     MatCardModule,
     MatButtonModule,
     BirdDetectionComponent,
-    StationMap,
     MatIconModule
 ],
 })
@@ -40,7 +36,6 @@ export class StationDetectionsComponent implements OnInit {
     stationId: number = 0;
     station: Station | null = null;
     weather!: OpenMeteoWeatherReading;
-
 
     constructor(
         private route: ActivatedRoute,
@@ -85,8 +80,6 @@ export class StationDetectionsComponent implements OnInit {
             this.error = 'Station ID not found in URL.';
         }
     }
-
-    
 
     goBackToStations(): void {
         this.router.navigate(['/']);

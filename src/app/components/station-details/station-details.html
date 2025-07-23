@@ -1,4 +1,4 @@
-<div class="station-details details-layout">
+<div class="page-container station-details">
     <div *ngIf="!station()">
         <p>No station data available.</p>
     </div>
@@ -30,7 +30,12 @@
             <strong>Distance</strong>
             <p>{{ distance() }} miles</p>
         </div>
+
     </div>
+
+    <!-- Weather Card -->
+    <station-weather clas="station-info-text" *ngIf="station().coords" [lattitude]="station().coords!.lat"
+        [longitude]="station().coords!.lon"></station-weather>
 
     <div class="map-container">
         <ng-container *ngIf="mapboxMapUrl(); else mapUnavailable">
@@ -43,4 +48,6 @@
             </div>
         </ng-template>
     </div>
+
+
 </div>

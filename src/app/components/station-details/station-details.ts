@@ -4,13 +4,14 @@ import { Station } from 'src/app/models/graphql.models';
 import { environment } from 'src/environments/environment';
 import { LocationService } from 'src/app/services/location-data.service';
 import { MapStatusService } from 'src/app/services/map-status.service';
+import { WeatherComponent } from '../weather/weather';
 
 @Component({
   selector: 'station-details',
   standalone: true,
   templateUrl: './station-details.html',
   styleUrl: './station-details.scss',
-  imports: [CommonModule, DecimalPipe],
+  imports: [CommonModule, DecimalPipe, WeatherComponent],
 })
 export class StationDetails {
   station = input.required<Station>();
@@ -18,7 +19,7 @@ export class StationDetails {
   public mapStatusService = inject(MapStatusService);
 
   public StationDetails(locationService: LocationService){
-    this.locationService = locationService;
+    this.locationService = locationService;    
   }
 
   public distance = computed(() => {

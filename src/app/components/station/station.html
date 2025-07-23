@@ -20,13 +20,6 @@
     <!-- General Info Card -->
     <station-details [station]="station"></station-details>
 
-    <!-- Weather Card -->
-    <station-weather *ngIf="station.coords" [lattitude]="station.coords.lat"
-      [longitude]="station.coords.lon"></station-weather>
-
-    <!--Live Detections Card -->
-    <!-- <live-detection [stationId]="stationId"></live-detection> -->
-
     <!-- Last bird detection -->
     <bird-detection [stationId]="stationId" [last]="true"></bird-detection>
   </mat-card>
