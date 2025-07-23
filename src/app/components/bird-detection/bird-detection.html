@@ -10,13 +10,13 @@
     <!-- Error -->
     <div *ngIf="error" class="error-message">
         <p>{{ error }}</p>
-        <button (click)="fetchLastDetection()">Retry</button>
+        <button class="primary-button" type="button" matButton="elevated" (click)="fetchLastDetection()">Retry</button>
     </div>
 
     <!-- No Detections -->
     <div *ngIf="detections.length === 0 && !loading && !error">
         <p>No detection data available.</p>
-        <button (click)="fetchLastDetection()">Retry</button>
+        <button class="primary-button" type="button" matButton="elevated" (click)="fetchLastDetection()">Retry</button>
     </div>
 
     <div *ngIf="detections.length > 0">

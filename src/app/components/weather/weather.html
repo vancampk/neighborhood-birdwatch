@@ -9,13 +9,13 @@
   <!-- Weather Error -->
   <div *ngIf="error" class="error-message">
     <p>{{ error }}</p>
-    <button (click)="fetchWeather()">Retry</button>
+    <button class="primary-button" type="button" matButton="elevated" (click)="fetchWeather()">Retry</button>
   </div>
 
   <!-- No Weather -->
   <div *ngIf="!weather && !loading && !error">
     <p>No weather data available.</p>
-    <button (click)="fetchWeather()">Retry</button>
+    <button class="primary-button" type="button" matButton="elevated" (click)="fetchWeather()">Retry</button>
   </div>
 
   <div class="weather-info" *ngIf="weather">

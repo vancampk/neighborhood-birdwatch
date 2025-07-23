@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Detection } from 'src/app/models/graphql.models';
 import { BirdDataService } from 'src/app/services/bird-data.service';
 import { register } from 'swiper/element/bundle';
+import { MatButtonModule } from '@angular/material/button';
 
 // register Swiper custom elements
 register();
@@ -10,7 +11,7 @@ register();
 @Component({
   selector: 'bird-detection',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule],
   templateUrl: './bird-detection.html',
   styleUrl: './bird-detection.css',
   encapsulation: ViewEncapsulation.None,
