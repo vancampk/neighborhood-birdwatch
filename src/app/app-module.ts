@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GraphQLModule } from './graphql.module';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GlobalLocationButtonComponent } from "./components/global-controls/global-location-button.component";
 
 
 @NgModule({
@@ -19,8 +20,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HttpClientModule,
     GraphQLModule,
     CommonModule,
-    FontAwesomeModule,    
-  ],
+    FontAwesomeModule,
+    GlobalLocationButtonComponent
+],
   exports: [
     App,
     CommonModule,

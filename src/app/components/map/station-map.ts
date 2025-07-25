@@ -1,7 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Station } from 'src/app/models/graphql.models';
-import { LocationService } from 'src/app/services/location-data.service';
+import { LocationService } from 'src/app/services/location.service';
 import { MapStatusService } from 'src/app/services/map-status.service';
 import { environment } from 'src/environments/environment';
 
@@ -28,7 +28,7 @@ export class StationMap {
     }
 
     const stationCoords = this.station()?.coords;
-    const userCoords = this.locationService.userCoords();
+    const userCoords = this.locationService.getCurrentLocationValue();
     const apiKey = environment.mapboxAccessToken;
 
     if (!stationCoords || !apiKey) {

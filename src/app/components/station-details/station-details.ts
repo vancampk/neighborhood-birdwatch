@@ -2,7 +2,7 @@ import { Component, computed, inject, input } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { Station } from 'src/app/models/graphql.models';
 import { environment } from 'src/environments/environment';
-import { LocationService } from 'src/app/services/location-data.service';
+import { LocationService } from 'src/app/services/location.service';
 import { MapStatusService } from 'src/app/services/map-status.service';
 import { WeatherComponent } from '../weather/weather';
 
@@ -24,7 +24,7 @@ export class StationDetails {
 
   public distance = computed(() => {
     const stationCoords = this.station()?.coords;
-    const userCoords = this.locationService.userCoords();
+    const userCoords = this.locationService.getCurrentLocationValue();
     if (!stationCoords || !userCoords) {
       return null;
     }
@@ -47,7 +47,7 @@ export class StationDetails {
     }
 
     const stationCoords = this.station()?.coords;
-    const userCoords = this.locationService.userCoords();
+    const userCoords = this.locationService.getCurrentLocationValue();
     const apiKey = environment.mapboxAccessToken;
 
     if (!stationCoords || !apiKey) {

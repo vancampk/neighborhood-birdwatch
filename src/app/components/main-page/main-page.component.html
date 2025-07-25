@@ -1,0 +1,13 @@
+<div class="page-container">
+  <!-- Show a message while waiting for location -->
+  <div *ngIf="!currentLocation; else stationsContent" class="loading-indicator">
+    <h2>Please select a location to find nearby stations.</h2>
+    <p>(A dialog should appear prompting you for a location.)</p>
+  </div>
+
+  <!-- Once location is available, show the main content -->
+  <ng-template #stationsContent>
+    <!-- The StationsComponent will now be displayed and will fetch data based on the selected location -->
+    <app-stations></app-stations>
+  </ng-template>
+</div>

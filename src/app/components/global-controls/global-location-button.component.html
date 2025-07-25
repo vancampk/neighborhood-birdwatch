@@ -1,0 +1,9 @@
+<button
+  *ngIf="isLocationSet"
+  mat-fab
+  class="global-location-btn"
+  (click)="openLocationSelector()"
+  aria-label="Change location"
+  matTooltip="Change Location">
+  <mat-icon>edit_location</mat-icon>
+</button>

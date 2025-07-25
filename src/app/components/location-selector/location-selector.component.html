@@ -1,0 +1,30 @@
+<div class="location-selector-container">
+  <h3>Find Stations Near You</h3>
+  <p>Allow the browser to use your location or search for a city.</p>
+
+  <div class="actions">
+    <button mat-raised-button class="primary-button" (click)="useBrowserLocation()" [disabled]="isLoading">
+      Use My Current Location
+    </button>
+
+    <span>OR</span>
+
+    <form (ngSubmit)="searchForCity()" class="city-search-form">
+      <mat-form-field appearance="outline" class="city-input">
+        <mat-label>Search for a city</mat-label>
+        <input matInput [(ngModel)]="citySearch" name="city" placeholder="e.g., New York">
+      </mat-form-field>
+      <button mat-raised-button class="primary-button" type="submit" [disabled]="!citySearch.trim() || isLoading">
+        Search
+      </button>
+    </form>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-overlay">
+    <mat-progress-spinner mode="indeterminate" [diameter]="50"></mat-progress-spinner>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>
