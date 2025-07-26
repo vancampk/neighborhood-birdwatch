@@ -1,15 +1,12 @@
-.settings-container {
+.settings-content {
+    font-size: 18px; /* A more standard font size for content */
+    padding-top: 20px; /* Add some space below the title */
+}
+
+.setting-item{
     display: flex;
-    position: relative;
-    /* Needed for the overlay positioning */
-    flex-direction: column;
-    
-    font-size: 22px;
-    /* Increased padding for a larger feel */
-    max-width: 650px;
-    /* Slightly wider */
-    text-align: start;
-    background-color: var(--primary-light);
-    color: white;
-    border-radius: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; /* Vertically align the label and toggle */
+    min-height: 50px; /* Give the row some height */
 }

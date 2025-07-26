@@ -61,6 +61,8 @@ export class GlobalControlsComponent implements OnInit, OnDestroy {
 
     const dialogRef = this.dialog.open(SettingsPanelComponent, {
       width: 'clamp(300px, 90vw, 500px)',
+      minHeight: '200px',
+      panelClass: 'settings-dialog-container'
     });
 
     this.menuOpen = true;

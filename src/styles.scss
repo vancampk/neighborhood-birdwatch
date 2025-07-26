@@ -8,6 +8,13 @@
 
 }
 
+/* Define the darker theme variables */
+.slightly-darker-mode {
+  --primary-dark: #5d009b;   /* 10% darker than #6700ac */
+  --primary-light: #985ee6;  /* 10% darker than #a968ff */
+  --secondary-light: #9cc2cf; /* 10% darker than #ADD8E6 */
+}
+
 // Global styles
 app-root {
   display: block;
@@ -132,4 +139,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     align-items: center !important;
     justify-content: center !important;
     line-height: 1; /* Helps normalize vertical alignment for text */
+}
+
+/* Custom dialog panel style for settings */
+.settings-dialog-container .mdc-dialog__surface {
+  background-color: var(--primary-light) !important;
+  color: white !important;
+  border-radius: 10px !important;
 }

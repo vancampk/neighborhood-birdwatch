@@ -1,12 +1,14 @@
-<div class="settings-container">
-  
-  <h2 mat-dialog-title>Application Settings</h2>
-  <mat-dialog-content>
-    <p>Settings options will go here.</p>
-    <p>For example, you could add a theme switcher or unit preferences.</p>
-  </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close class="primary-button">Close</button>
-  </mat-dialog-actions>
-  
-</div>
+<h2 mat-dialog-title>Application Settings</h2>
+<mat-dialog-content class="settings-content">
+  <div class="setting-item">
+    <mat-label>Slightly Darker Mode</mat-label>
+    <mat-slide-toggle
+      [checked]="(isSlightlyDarker$ | async)!"
+      (change)="onThemeToggle($event)"
+      aria-label="Toggle slightly darker mode">
+    </mat-slide-toggle>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="primary-button">Close</button>
+</mat-dialog-actions>
