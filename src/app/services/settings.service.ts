@@ -10,9 +10,9 @@ export interface FavoriteStation {
 }
 
 export interface AppSettings {
+  rememberSettings: boolean;
   theme: string;
   preferredLocationMethod: LocationPreference;
-  rememberSettings: boolean;
   location?: Coordinates;
   stationFavorites?: FavoriteStation[];
 }
@@ -24,10 +24,11 @@ export const SETTINGS_KEY = 'neighborhood-birdwatch-settings';
 })
 export class SettingsService {
   private readonly defaultSettings: AppSettings = {
+    rememberSettings: false,
     theme: 'default-theme',
     preferredLocationMethod: 'prompt',
-    rememberSettings: false,
-    stationFavorites: [],
+    location: undefined,
+    stationFavorites: []
   };
 
   private settingsSubject = new BehaviorSubject<AppSettings>(this.defaultSettings);
@@ -38,11 +39,23 @@ export class SettingsService {
   }
 
   private loadSettings(): void {
-    const savedSettings = localStorage.getItem(SETTINGS_KEY);
-    const settings = savedSettings ? JSON.parse(savedSettings) : this.defaultSettings;
-    // Ensure loaded settings have all keys from default settings
-    const mergedSettings = { ...this.defaultSettings, ...settings };
-    this.settingsSubject.next(mergedSettings);
+    const savedSettingsJson = localStorage.getItem(SETTINGS_KEY);
+    let settingsToLoad = this.defaultSettings;
+
+    if (savedSettingsJson) {
+      const savedSettings = JSON.parse(savedSettingsJson);
+      // Merge with defaults. This ensures new properties are added and, crucially,
+      // re-orders the keys to match the `defaultSettings` definition.
+      const mergedSettings = { ...this.defaultSettings, ...savedSettings };
+
+      // If the user wants to remember settings, persist the potentially re-ordered
+      // object back to storage immediately. This "cleans" the stored data.
+      if (mergedSettings.rememberSettings) {
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify(mergedSettings));
+      }
+      settingsToLoad = mergedSettings;
+    }
+    this.settingsSubject.next(settingsToLoad);
   }
 
   private saveSettings(settings: AppSettings): void {
