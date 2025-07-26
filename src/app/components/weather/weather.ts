@@ -1,8 +1,8 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { OpenMeteoWeatherReading } from 'src/app/models/open-meteo.model';
-import { WeatherService } from 'src/app/services/weather.service';
+import { OpenMeteoWeatherReading } from '../../models/open-meteo.model';
+import { WeatherService } from '../../services/weather.service';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({

@@ -1,34 +1,68 @@
-.station-details{
-    background-color: var(--primary-light);
-    opacity: 0.9;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
+.station-details {
+  background-color: var(--primary-light);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--mat-divider-color, rgba(0, 0, 0, 0.12));
+  margin: 1rem;
+  
 }
 
-.map-container,
-.map-unavailable {
-    max-width: 50%;
+.station-header {
+  display: flex;
+  justify-content: center; 
+   font-weight: 400;
+  border-bottom: 1px solid var(--mat-divider-color, rgba(0, 0, 0, 0.12));
 }
 
-.map-image {
+.station-info-text {  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.data-point {
+  // Styles for each piece of information
+  p {
+    margin: 0.1rem 0 0 0; // Tighter spacing
+    font-size: 1em;
+    word-wrap: break-word; // Ensure long strings don't overflow
+  }
+
+ 
+}
+
+.details-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.info-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around
+}
+
+.map-column {
+  flex: 1 1 300px; /* Flex-grow, flex-shrink, flex-basis */
+  min-width: 250px;
+  position: sticky; // Make map sticky on scroll
+  top: 1rem; // Offset from the top of the viewport
+}
+
+.map-container {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--mat-divider-color, rgba(0, 0, 0, 0.12));
+
+  .map-image,
+  .map-unavailable {
+    display: block;
     width: 100%;
-    border-radius: 15px;
-    object-fit: cover;
-    padding: 10px;
-}
-
-.map-unavailable {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 300px; // Give it some height
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    color: #666;
-    border-radius: 4px;
+    background-color: rgba(0,0,0,0.05);
+  }
 }

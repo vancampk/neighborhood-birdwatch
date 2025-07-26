@@ -1,9 +1,9 @@
 .detection-container {
-    background-color: var(--primary-light);
-    opacity: 0.9;
-    border-radius: 10px;
-    text-align: center;
-    padding: 10px;
+   background-color: var(--primary-light);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--mat-divider-color, rgba(0, 0, 0, 0.12));
+  margin: 1rem;
 }
 
 

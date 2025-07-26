@@ -1,0 +1,19 @@
+<div *ngIf="isLoading" class="loading-container">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  <p>Finding nearby stations...</p>
+</div>
+
+<div *ngIf="!isLoading && stations.length > 0">
+  <mat-list>
+    <div *ngFor="let station of stations">
+      <mat-list-item class="station-item">
+        <div matListItemTitle class="station-name">{{ station.name }}</div>
+        <div matListItemLine class="station-details">{{ station.address }} | ~{{ station.distance.toFixed(1) }} miles away</div>
+        <div matListItemMeta>
+          <app-favorite-button [stationId]="station.id" [stationName]="station.name"></app-favorite-button>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-list>
+</div>

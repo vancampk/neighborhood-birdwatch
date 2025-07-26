@@ -1,51 +1,40 @@
-<div class="page-container weather-container">
-
-  <!-- Loading -->
-  <div *ngIf="loading" class="loading-indicator">
-    <h3>{{ loadingMessage }}</h3>
-    <div class="spinner"></div>
-  </div>
-
-  <!-- Weather Error -->
-  <div *ngIf="error" class="error-message">
-    <p>{{ error }}</p>
-    <button class="primary-button" type="button" matButton="elevated" (click)="fetchWeather()">Retry</button>
-  </div>
-
-  <!-- No Weather -->
-  <div *ngIf="!weather && !loading && !error">
-    <p>No weather data available.</p>
-    <button class="primary-button" type="button" matButton="elevated" (click)="fetchWeather()">Retry</button>
-  </div>
-
-  <div class="weather-info" *ngIf="weather">
-    <div class="data-point">
+<div class="weather-container">
+  <h3 class="panel-subtitle">Current Weather</h3>
+  <div *ngIf="!loadingMessage && weather; else loading" class="weather-grid">
+    <div class="data-point" *ngIf="weather">
       <strong>Temperature</strong>
       <p>{{ weather.temp | number:'1.0-0' }}°</p>
     </div>
-    <div class="data-point">
+    <div class="data-point" *ngIf="weather">
       <strong>Humidity</strong>
       <p>{{ weather.humidity }}%</p>
     </div>
-    <div class="data-point">
+    <div class="data-point" *ngIf="weather">
       <strong>Rain (in)</strong>
-      <p>{{ weather.rain }}</p>
+      <p>{{ weather.rain | number:'1.2-2'}}</p>
     </div>
-    <div class="data-point">
+    <div class="data-point" *ngIf="weather">
       <strong>Cloud Cover</strong>
       <p>{{ weather.cloudiness }}</p>
     </div>
-    <div class="data-point">
+
+    <div class="data-point" *ngIf="weather">
       <strong>Wind Speed (mph)</strong>
       <p>{{ weather.windSpeed | number:'1.2-2'}}</p>
     </div>
-    <div class="data-point">
+    <div class="data-point" *ngIf="weather">
       <strong>Wind Direction</strong>
       <p> {{ weather.windDirCompass }}</p>
     </div>
-    <div class="data-point">
+    <div class="data-point" *ngIf="weather">
       <strong>Pressure (hPa)</strong>
       <p>{{ weather.pressure | number:'1.2-2'}} hPa</p>
     </div>
+
   </div>
+  <ng-template #loading>
+    <div class="loading-message">
+      <p>Loading weather...</p>
+    </div>
+  </ng-template>
 </div>

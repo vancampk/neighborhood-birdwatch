@@ -4,11 +4,17 @@ import { Coordinates } from '../models/coordinates.model';
 
 export type LocationPreference = 'prompt' | 'saved-prompt';
 
+export interface FavoriteStation {
+  id: number;
+  name: string;
+}
+
 export interface AppSettings {
   theme: string;
   preferredLocationMethod: LocationPreference;
   rememberSettings: boolean;
   location?: Coordinates;
+  stationFavorites?: FavoriteStation[];
 }
 
 export const SETTINGS_KEY = 'neighborhood-birdwatch-settings';
@@ -21,6 +27,7 @@ export class SettingsService {
     theme: 'default-theme',
     preferredLocationMethod: 'prompt',
     rememberSettings: false,
+    stationFavorites: [],
   };
 
   private settingsSubject = new BehaviorSubject<AppSettings>(this.defaultSettings);
@@ -66,5 +73,22 @@ export class SettingsService {
   resetToDefaults(): void {
     localStorage.removeItem(SETTINGS_KEY);
     this.settingsSubject.next(this.defaultSettings);
+  }
+
+  toggleFavoriteStation(stationId: number, stationName:string): void {
+    const station = { id: stationId, name: stationName };
+    const settings = this.getSettings();
+    const favorites = settings.stationFavorites || [];
+    const existingIndex = favorites.findIndex(fav => fav.id === station.id);
+
+    if (existingIndex > -1) {
+      // Station is already a favorite, so remove it.
+      const newFavorites = favorites.filter(fav => fav.id !== station.id);
+      this.updateSettings({ stationFavorites: newFavorites });
+    } else {
+      // Station is not a favorite, so add it.
+      const newFavorites = [...favorites, station];
+      this.updateSettings({ stationFavorites: newFavorites });
+    }
   }
 }

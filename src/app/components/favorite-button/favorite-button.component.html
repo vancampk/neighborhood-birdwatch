@@ -1,0 +1,7 @@
+<button mat-icon-button (click)="toggleFavorite($event)" [attr.aria-pressed]="isFavorite$ | async"
+  [attr.aria-label]="(isFavorite$ | async) ? 'Remove ' + stationName + ' from favorites' : 'Add ' + stationName + ' to favorites'"
+  [matTooltip]="(isFavorite$ | async) ? 'Remove from favorites' : 'Add to favorites'">
+  <mat-icon [color]="(isFavorite$ | async) ? 'primary' : undefined">
+    {{ (isFavorite$ | async) ? 'star' : 'star_border' }}
+  </mat-icon>
+</button>

@@ -1,53 +1,57 @@
 <div class="page-container station-details">
-    <div *ngIf="!station()">
-        <p>No station data available.</p>
-    </div>
+    <ng-container *ngIf="station(); else noStationData">
 
-    <div class="station-info-text">
-        <div class="data-point">
-            <strong>ID</strong>
-            <p>{{ station().id }}</p>
-        </div>
-        <div class="data-point">
-            <strong>Name</strong>
-            <p>{{ station().name }}</p>
-        </div>
-        <div class="data-point" *ngIf="station().location">
-            <strong>Location</strong>
-            <p>{{ station().location }}</p>
-        </div>
-        <div class="data-point" *ngIf="station().type">
-            <strong>Type</strong>
-            <p>{{ station().type }}</p>
-        </div>
-        <div class="data-point" *ngIf="station().coords">
-            <strong>Coordinates</strong>
-            <p *ngIf="dmsCoords()">
-                {{ dmsCoords()!.lat }}, {{ dmsCoords()!.lon }}
-            </p>
-        </div>
-        <div class="data-point" *ngIf="distance()">
-            <strong>Distance</strong>
-            <p>{{ distance() }} miles</p>
-        </div>
 
-    </div>
-
-    <!-- Weather Card -->
-    <station-weather clas="station-info-text" *ngIf="station().coords" [lattitude]="station().coords!.lat"
-        [longitude]="station().coords!.lon"></station-weather>
-
-    <div class="map-container">
-        <ng-container *ngIf="mapboxMapUrl(); else mapUnavailable">
-            <img [src]="mapboxMapUrl()" (error)="handleMapError()"
-                alt="Mapbox map showing location of sation {{ station()!.name }}" class="map-image" />
-        </ng-container>
-        <ng-template #mapUnavailable>
-            <div class="map-unavailable">
-                <p>Map images are temporarily unavailable.</p>
+        <div class="details-content-wrapper">            
+            <div class="info-column">
+                <div class="station-header">
+                    <app-favorite-button [stationId]="station()!.id" [stationName]="station()!.name"></app-favorite-button>
+                    <h2>{{ station()!.name }}</h2>
+                </div>
+                <div class="station-info-text">
+                    <div class="data-point">
+                        <strong>ID</strong>
+                        <p>{{ station()!.id }}</p>
+                    </div>
+                    <div class="data-point" *ngIf="station()!.location">
+                        <strong>Location</strong>
+                        <p>{{ station()!.location }}</p>
+                    </div>
+                    <div class="data-point" *ngIf="station()!.type">
+                        <strong>Type</strong>
+                        <p>{{ station()!.type }}</p>
+                    </div>
+                    <div class="data-point" *ngIf="station()!.coords">
+                        <strong>Coordinates</strong>
+                        <p *ngIf="dmsCoords()">
+                            {{ dmsCoords()!.lat }}, {{ dmsCoords()!.lon }}
+                        </p>
+                    </div>
+                    <div class="data-point" *ngIf="distance()">
+                        <strong>Distance</strong>
+                        <p>{{ distance() }} miles</p>
+                    </div>
+                </div>
+                <station-weather *ngIf="station()!.coords" [lattitude]="station()!.coords!.lat"
+                    [longitude]="station()!.coords!.lon"></station-weather>
             </div>
-        </ng-template>
-    </div>
+            <div class="map-column">
+                <div class="map-container">
+                    <ng-container *ngIf="mapboxMapUrl(); else mapUnavailable">
+                        <img [src]="mapboxMapUrl()" (error)="handleMapError()"
+                            alt="Mapbox map showing location of sation {{ station()!.name }}" class="map-image" />
+                    </ng-container>
+                    <ng-template #mapUnavailable>
+                        <div class="map-unavailable">
+                            <p>Map images are temporarily unavailable.</p>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
 
-
+        </div>
+    </ng-container>
+    <ng-template #noStationData>
+        <p>No station data available.</p>
+    </ng-template>
 </div>

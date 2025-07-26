@@ -5,13 +5,14 @@ import { environment } from '../../../environments/environment';
 import { LocationService } from '../../services/location.service';
 import { MapStatusService } from '../../services/map-status.service';
 import { WeatherComponent } from '../weather/weather';
+import { FavoriteButtonComponent } from "../favorite-button/favorite-button.component";
 
 @Component({
   selector: 'station-details',
   standalone: true,
   templateUrl: './station-details.html',
   styleUrl: './station-details.scss',
-  imports: [CommonModule, WeatherComponent],
+  imports: [CommonModule, WeatherComponent, FavoriteButtonComponent],
 })
 export class StationDetails {
   station = input.required<Station>();

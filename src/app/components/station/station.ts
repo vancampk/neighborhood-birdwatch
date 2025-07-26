@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { StationDetails } from "../station-details/station-details";
 import { MatCardModule } from '@angular/material/card';
-import { WeatherService } from 'src/app/services/weather.service';
 import { MatButtonModule } from '@angular/material/button';
 import { OpenMeteoWeatherReading } from 'src/app/models/open-meteo.model';
 import { BirdDetectionComponent } from "../bird-detection/bird-detection";
@@ -20,14 +19,14 @@ import { MatIconModule } from '@angular/material/icon';
     templateUrl: './station.html',
     styleUrls: ['./station.css'],
     imports: [
-    CommonModule,
-    RouterLink,
-    StationDetails,
-    MatCardModule,
-    MatButtonModule,
-    BirdDetectionComponent,
-    MatIconModule
-],
+        CommonModule,
+        RouterLink,
+        StationDetails,
+        MatCardModule,
+        MatButtonModule,
+        BirdDetectionComponent,
+        MatIconModule
+    ],
 })
 export class StationDetectionsComponent implements OnInit {
     detection: Detection | null = null;
@@ -40,7 +39,6 @@ export class StationDetectionsComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private birdDataService: BirdDataService,
-        private weatherService: WeatherService,
         private router: Router
     ) { }
 
