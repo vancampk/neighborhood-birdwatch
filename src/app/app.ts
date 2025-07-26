@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { GlobalLocationButtonComponent } from "./components/global-controls/global-location-button.component";
+import { GlobalControlsComponent } from './components/global-controls/global-controls.component';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
   standalone: false,
-  providers: [GlobalLocationButtonComponent],
+  providers: [GlobalControlsComponent],
   styleUrl: './app.css'
 })
 export class App {

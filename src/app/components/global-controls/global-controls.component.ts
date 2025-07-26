@@ -7,9 +7,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { LocationService } from '../../services/location.service';
 import { LocationSelectorComponent } from '../location-selector/location-selector.component';
+import { SettingsPanelComponent } from '../settings/settings-panel.component';
 
 @Component({
-  selector: 'location-button',
+  selector: 'global-controls',
   standalone: true,
   imports: [
     CommonModule,
@@ -18,11 +19,12 @@ import { LocationSelectorComponent } from '../location-selector/location-selecto
     MatIconModule,
     MatTooltipModule
   ],
-  templateUrl: './global-location-button.component.html',
-  styleUrls: ['./global-location-button.component.scss']
+  templateUrl: './global-controls.component.html',
+  styleUrls: ['./global-controls.component.scss']
 })
-export class GlobalLocationButtonComponent implements OnInit, OnDestroy {
+export class GlobalControlsComponent implements OnInit, OnDestroy {
   isLocationSet = false;
+  menuOpen = false;
   private subscriptions = new Subscription();
 
   constructor(
@@ -39,12 +41,34 @@ export class GlobalLocationButtonComponent implements OnInit, OnDestroy {
   }
 
   openLocationSelector(): void {
-    if (this.dialog.openDialogs.length === 0) {
-      this.dialog.open(LocationSelectorComponent, {
-        width: 'clamp(300px, 90vw, 500px)',
-        disableClose: false, // Allow user to cancel changing location
-      });
-    }
+    if (this.dialog.openDialogs.length > 0) { return; }
+
+    const dialogRef = this.dialog.open(LocationSelectorComponent, {
+      width: 'clamp(300px, 90vw, 500px)',
+      disableClose: false,
+    });
+
+    this.menuOpen = true;
+    this.subscriptions.add(
+      dialogRef.afterClosed().subscribe(() => {
+        this.menuOpen = false;
+      })
+    );
+  }
+
+  openSettingsPanel(): void {
+    if (this.dialog.openDialogs.length > 0) { return; }
+
+    const dialogRef = this.dialog.open(SettingsPanelComponent, {
+      width: 'clamp(300px, 90vw, 500px)',
+    });
+
+    this.menuOpen = true;
+    this.subscriptions.add(
+      dialogRef.afterClosed().subscribe(() => {
+        this.menuOpen = false;
+      })
+    );
   }
 
   ngOnDestroy(): void {

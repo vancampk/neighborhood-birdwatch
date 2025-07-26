@@ -1,0 +1,23 @@
+<div class="global-controls-container">
+  <!-- Settings Button -->
+  <button
+    mat-fab
+    [disabled]="menuOpen"
+    class="control-btn"
+    (click)="openSettingsPanel()"
+    aria-label="Open settings"
+    matTooltip="Settings">
+    <mat-icon>settings</mat-icon>
+  </button>
+
+  <!-- Location Button (only shows if location is set) -->
+  <button
+    mat-fab
+    [disabled]="menuOpen"
+    class="control-btn"
+    (click)="openLocationSelector()"
+    aria-label="Change location"
+    matTooltip="Change Location">
+    <mat-icon>edit_location</mat-icon>
+  </button>
+</div>

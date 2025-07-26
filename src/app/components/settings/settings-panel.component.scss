@@ -1,0 +1,15 @@
+.settings-container {
+    display: flex;
+    position: relative;
+    /* Needed for the overlay positioning */
+    flex-direction: column;
+    
+    font-size: 22px;
+    /* Increased padding for a larger feel */
+    max-width: 650px;
+    /* Slightly wider */
+    text-align: start;
+    background-color: var(--primary-light);
+    color: white;
+    border-radius: 10px;
+}

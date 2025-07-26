@@ -6,7 +6,6 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
-  { path: 'stations', component: StationsComponent },
   { path: 'station/:id', component: StationDetectionsComponent },
   { path: '**', redirectTo: '' } // Optional: Wildcard route for a 404 page
 ];

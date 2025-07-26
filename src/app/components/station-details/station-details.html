@@ -40,7 +40,7 @@
     <div class="map-container">
         <ng-container *ngIf="mapboxMapUrl(); else mapUnavailable">
             <img [src]="mapboxMapUrl()" (error)="handleMapError()"
-                alt="Mapbox map showing location of sation {{ station()?.name }}" class="map-image" />
+                alt="Mapbox map showing location of sation {{ station()!.name }}" class="map-image" />
         </ng-container>
         <ng-template #mapUnavailable>
             <div class="map-unavailable">

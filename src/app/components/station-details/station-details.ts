@@ -1,9 +1,9 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
-import { Station } from 'src/app/models/graphql.models';
-import { environment } from 'src/environments/environment';
-import { LocationService } from 'src/app/services/location.service';
-import { MapStatusService } from 'src/app/services/map-status.service';
+import { CommonModule } from '@angular/common';
+import { Station } from '../../models/graphql.models';
+import { environment } from '../../../environments/environment';
+import { LocationService } from '../../services/location.service';
+import { MapStatusService } from '../../services/map-status.service';
 import { WeatherComponent } from '../weather/weather';
 
 @Component({
@@ -11,7 +11,7 @@ import { WeatherComponent } from '../weather/weather';
   standalone: true,
   templateUrl: './station-details.html',
   styleUrl: './station-details.scss',
-  imports: [CommonModule, DecimalPipe, WeatherComponent],
+  imports: [CommonModule, WeatherComponent],
 })
 export class StationDetails {
   station = input.required<Station>();

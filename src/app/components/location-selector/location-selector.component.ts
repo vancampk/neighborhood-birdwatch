@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { LocationService } from '../../services/location.service';
 
 @Component({
@@ -18,7 +19,8 @@ import { LocationService } from '../../services/location.service';
     MatButtonModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   templateUrl: './location-selector.component.html',
   styleUrls: ['./location-selector.component.scss']
