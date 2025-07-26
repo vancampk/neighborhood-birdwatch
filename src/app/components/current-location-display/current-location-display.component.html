@@ -1,0 +1,13 @@
+<ng-container *ngIf="currentLocation$ | async as currentLocation">
+  <div class="current-location-info">
+    <p>
+      Location set as:
+      <ng-container *ngIf="currentLocation.city && currentLocation.state; else latLonInfo">
+        <strong>{{ currentLocation.city }}, {{ currentLocation.state }}</strong>
+      </ng-container>
+      <ng-template #latLonInfo>
+        <strong>Lat:</strong> {{ currentLocation.latitude.toFixed(4) }}, <strong>Lon:</strong> {{ currentLocation.longitude.toFixed(4) }}
+      </ng-template>
+    </p>   
+  </div>
+</ng-container>

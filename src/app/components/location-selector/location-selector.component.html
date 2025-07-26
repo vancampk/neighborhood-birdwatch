@@ -3,9 +3,13 @@
     <mat-icon>close</mat-icon>
   </button>
   <h3>Find Stations Near You</h3>
-  <p>Allow the browser to use your location or search for a city.</p>
+
+  <app-current-location-display></app-current-location-display>
+  
+  <mat-divider></mat-divider>
 
   <div class="actions">
+     <p>Use current location or search for a city.</p>
     <button mat-raised-button class="primary-button" (click)="useBrowserLocation()" [disabled]="isLoading">
       Use My Current Location
     </button>

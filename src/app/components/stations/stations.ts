@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BirdDataService } from '../../services/bird-data.service';
-import { Station } from 'src/app/models/graphql.models';
+import { Station } from '../../models/graphql.models';
 import { Subscription } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { LocationService, Coordinates } from 'src/app/services/location.service';
+import { LocationService } from '../../services/location.service';
+import { Coordinates } from '../../models/coordinates.model';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 

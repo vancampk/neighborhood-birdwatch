@@ -1,6 +1,8 @@
 .settings-content {
     font-size: 18px; /* A more standard font size for content */
     padding-top: 20px; /* Add some space below the title */
+    /* Allow the form field's floating label to be visible without being clipped */
+    overflow: visible;
 }
 
 .setting-item{
@@ -9,4 +11,27 @@
     justify-content: space-between;
     align-items: center; /* Vertically align the label and toggle */
     min-height: 50px; /* Give the row some height */
+}
+
+.setting-item.column {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.setting-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 10px;
+}
+
+.theme-selector {
+    width: 100%;
+}
+
+.setting-divider {
+    width: 100%;
+    border-color: rgba(255, 255, 255, 0.2);
+    margin: 15px 0;
 }

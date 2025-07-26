@@ -1,14 +1,43 @@
 <h2 mat-dialog-title>Application Settings</h2>
 <mat-dialog-content class="settings-content">
-  <div class="setting-item">
-    <mat-label>Slightly Darker Mode</mat-label>
-    <mat-slide-toggle
-      [checked]="(isSlightlyDarker$ | async)!"
-      (change)="onThemeToggle($event)"
-      aria-label="Toggle slightly darker mode">
-    </mat-slide-toggle>
-  </div>
+
+    <div class="setting-item">
+        <mat-form-field appearance="outline" class="theme-selector">
+            <mat-label>Color Theme</mat-label>
+            <mat-select [(ngModel)]="settings.theme" (ngModelChange)="onSettingsChange()">
+                <mat-option *ngFor="let theme of availableThemes" [value]="theme">
+                    {{ theme.replace('-theme', '').replace('-', ' ') | titlecase }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <hr class="setting-divider">
+
+    <div class="setting-item column">
+        <mat-label>Initial Location Method</mat-label>
+        <mat-radio-group aria-label="Select a location preference" class="setting-radio-group"
+            [(ngModel)]="settings.preferredLocationMethod" (ngModelChange)="onSettingsChange()">
+            <mat-radio-button value="prompt">Always Prompt</mat-radio-button>
+            <mat-radio-button value="saved-prompt">Saved First / Then Prompt</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <hr class="setting-divider">
+
+    <div class="setting-item">
+        <mat-label>Remember My Settings</mat-label>
+        <mat-slide-toggle [(ngModel)]="settings.rememberSettings" (ngModelChange)="onSettingsChange()"
+            aria-label="Toggle remember settings">
+        </mat-slide-toggle>
+    </div>
+    <small class="setting-description">
+       Turning this off will clear all saved settings and location data.
+   </small>
+
+    <hr class="setting-divider">
+    <app-local-storage-inspector></app-local-storage-inspector>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close class="primary-button">Close</button>
+    <button mat-button mat-dialog-close class="primary-button">Close</button>
 </mat-dialog-actions>

@@ -1,33 +1,30 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { SettingsService } from './settings.service';
+
+export const THEMES = ['default-theme', 'blue-jay-theme', 'cardinal-theme', 'goldfinch-theme', 'downy-woodpecker-theme', 'black-capped-chickadee-theme', 'hummingbird-theme', 'robin-theme'];
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
-  private isSlightlyDarker = new BehaviorSubject<boolean>(false);
-  isSlightlyDarker$ = this.isSlightlyDarker.asObservable();
   private renderer: Renderer2;
 
-  constructor(rendererFactory: RendererFactory2) {
+  constructor(
+    rendererFactory: RendererFactory2,
+    private settingsService: SettingsService
+  ) {
     this.renderer = rendererFactory.createRenderer(null, null);
-    this.loadInitialTheme();
+    this.settingsService.settings$.subscribe(settings => {
+      this.updateBodyClass(settings.theme);
+    });
   }
 
-  private loadInitialTheme() {
-    const savedTheme = localStorage.getItem('isSlightlyDarker');
-    const isDark = savedTheme === 'true';
-    this.isSlightlyDarker.next(isDark);
-    this.updateBodyClass(isDark);
-  }
-
-  toggleSlightlyDarkerTheme(isDark: boolean) {
-    this.isSlightlyDarker.next(isDark);
-    localStorage.setItem('isSlightlyDarker', String(isDark));
-    this.updateBodyClass(isDark);
-  }
-
-  private updateBodyClass(isDark: boolean) {
-    isDark ? this.renderer.addClass(document.body, 'slightly-darker-mode') : this.renderer.removeClass(document.body, 'slightly-darker-mode');
+  private updateBodyClass(themeName: string) {
+    // Remove all possible theme classes
+    THEMES.forEach(theme => {
+      this.renderer.removeClass(document.body, theme);
+    });
+    // Add the new theme class
+    this.renderer.addClass(document.body, themeName);
   }
 }

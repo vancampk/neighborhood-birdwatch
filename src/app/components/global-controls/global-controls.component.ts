@@ -10,7 +10,7 @@ import { LocationSelectorComponent } from '../location-selector/location-selecto
 import { SettingsPanelComponent } from '../settings/settings-panel.component';
 
 @Component({
-  selector: 'global-controls',
+  selector: 'app-global-controls',
   standalone: true,
   imports: [
     CommonModule,
@@ -23,22 +23,14 @@ import { SettingsPanelComponent } from '../settings/settings-panel.component';
   styleUrls: ['./global-controls.component.scss']
 })
 export class GlobalControlsComponent implements OnInit, OnDestroy {
-  isLocationSet = false;
   menuOpen = false;
   private subscriptions = new Subscription();
 
   constructor(
     private dialog: MatDialog,
-    private locationService: LocationService
   ) {}
 
-  ngOnInit(): void {
-    this.subscriptions.add(
-      this.locationService.location$.subscribe(location => {
-        this.isLocationSet = !!location;
-      })
-    );
-  }
+  ngOnInit(): void { }
 
   openLocationSelector(): void {
     if (this.dialog.openDialogs.length > 0) { return; }
@@ -61,7 +53,7 @@ export class GlobalControlsComponent implements OnInit, OnDestroy {
 
     const dialogRef = this.dialog.open(SettingsPanelComponent, {
       width: 'clamp(300px, 90vw, 500px)',
-      minHeight: '200px',
+      minHeight: '300px',
       panelClass: 'settings-dialog-container'
     });
 

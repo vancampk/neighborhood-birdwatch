@@ -8,6 +8,7 @@ import { GraphQLModule } from './graphql.module';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GlobalControlsComponent } from "./components/global-controls/global-controls.component";
+import { MatIconModule } from "@angular/material/icon";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { GlobalControlsComponent } from "./components/global-controls/global-con
     GraphQLModule,
     CommonModule,
     FontAwesomeModule,
-    GlobalControlsComponent
+    GlobalControlsComponent,
+    MatIconModule
 ],
   exports: [
     App,

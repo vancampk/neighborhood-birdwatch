@@ -1,0 +1,15 @@
+<div class="inspector-container">
+  <div class="header">
+    <h4>Local Storage Inspector</h4>
+    <button mat-stroked-button color="warn" *ngIf="hasData" (click)="clearStorage()">Clear & Reset</button>
+  </div>
+  <div *ngIf="hasData; else noData">
+    <p>
+      Data found for key: <strong>{{ storageKey }}</strong>
+    </p>
+    <pre>{{ storedSettings | json }}</pre>
+  </div>
+  <ng-template #noData>
+    <p>No data found in local storage for key: <strong>{{ storageKey }}</strong></p>
+  </ng-template>
+</div>
