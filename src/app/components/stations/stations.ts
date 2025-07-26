@@ -8,6 +8,7 @@ import { LocationService } from '../../services/location.service';
 import { Coordinates } from '../../models/coordinates.model';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { FavoriteButtonComponent } from "../favorite-button/favorite-button.component";
 
 
 
@@ -16,7 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './stations.html',
   styleUrls: ['./stations.css'],
   standalone: true,
-  imports: [RouterLink, CommonModule, MatCardModule, MatButtonModule],
+  imports: [RouterLink, CommonModule, MatCardModule, MatButtonModule, FavoriteButtonComponent],
 })
 export class StationsComponent implements OnInit, OnDestroy {
   nearbyStations: Station[] = [];

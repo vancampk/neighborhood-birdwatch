@@ -13,15 +13,12 @@
 
   <div *ngIf="!loadingMessage && nearbyStations.length > 0">
     <div class="station-grid">
-      <mat-card *ngFor="let station of nearbyStations" class="station-tile">
+      <mat-card *ngFor="let station of nearbyStations" class="station-tile">          
+        <app-favorite-button [stationId]="+station.id" [stationName]="station.name"></app-favorite-button>
         <mat-card-header>
-          <mat-card-title>{{ station.name.trim() }}</mat-card-title>
+          <mat-card-title>{{ station.name }}</mat-card-title>
           <mat-card-subtitle>Distance: {{getStationDistance(station) | number:'1.1-1'}} mi</mat-card-subtitle>
-
-        </mat-card-header>
-        <mat-card-content>
-
-        </mat-card-content>
+        </mat-card-header>       
         <mat-card-actions align="end">
           <button class="secondary-button" type="button" matButton="elevated"
             [routerLink]="['/station', station.id]">Learn More</button>

@@ -5,7 +5,7 @@
         <div class="details-content-wrapper">            
             <div class="info-column">
                 <div class="station-header">
-                    <app-favorite-button [stationId]="station()!.id" [stationName]="station()!.name"></app-favorite-button>
+                    <app-favorite-button [stationId]="+station()!.id" [stationName]="station()!.name"></app-favorite-button>
                     <h2>{{ station()!.name }}</h2>
                 </div>
                 <div class="station-info-text">

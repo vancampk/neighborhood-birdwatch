@@ -7,7 +7,27 @@
 }
 
 .station-tile {
+  /* Establishes a positioning context for child elements that are absolutely positioned. */
+  position: relative;
   background-color: var(--primary-dark);
   width: 400px;
   text-align: start;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Add padding to the header to prevent the title from overlapping the favorite button */
+.station-tile mat-card-header {
+  /* The button is 40px wide + 4px right offset. 48px gives a little extra space. */
+  padding-right: 48px;
+  /* Make the header grow to push the actions to the bottom */
+  flex-grow: 1;
+}
+
+/* Target the favorite button component when it's inside a station-tile */
+.station-tile app-favorite-button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 1; /* Ensures the button is layered on top of other card content */
 }
