@@ -7,8 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { GraphQLModule } from './graphql.module';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { GlobalControlsComponent } from "./components/global-controls/global-controls.component";
 import { MatIconModule } from "@angular/material/icon";
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { GlobalControlsComponent } from "./components/global-controls/global-controls.component";
 
 
 @NgModule({
@@ -22,8 +23,9 @@ import { MatIconModule } from "@angular/material/icon";
     GraphQLModule,
     CommonModule,
     FontAwesomeModule,
-    GlobalControlsComponent,
-    MatIconModule
+    MatIconModule,
+    MatSidenavModule,
+    GlobalControlsComponent
 ],
   exports: [
     App,
