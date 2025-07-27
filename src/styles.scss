@@ -61,7 +61,6 @@ app-root {
   display: block;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
 }
 
 body {
@@ -75,6 +74,11 @@ body {
   font-family: 'Courier New', Courier, monospace;
 }
 
+.app-container {
+  /* Ensure the container doesn't have its own background, so the body's gradient is visible */
+  background-color: transparent;
+}
+
 h2, h3, h4{
   padding: 0px;
   margin: 5px;
@@ -83,19 +87,19 @@ h2, h3, h4{
 // Controls
 .primary-button {
   background-color: var(--primary-dark) !important;
-  color: white  !important;
+  color: white !important;
   margin: 0px 10px;
 }
-button:hover {
+.primary-button:hover {
   background-color: var(--primary-light) !important;
 }
 
 .secondary-button {
   background-color: var(--primary-light) !important;
-  color: white  !important; 
+  color: white !important;
   margin: 0px 10px;
 }
-button:hover {
+.secondary-button:hover {
   background-color: var(--secondary-light) !important;
 }
 
@@ -130,9 +134,11 @@ button:hover {
   justify-items: center;
   display: flex;
   flex-direction: column;
-  padding: 0px 10px;
   margin-left: auto;
   margin-right: auto;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .loading-indicator, .error-message, .no-detections {
@@ -165,21 +171,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     p {
         margin: 0;
     }
-}
-
-.back-button {
-    position: fixed !important;
-    top: 20px;
-    left: 20px;
-    z-index: 1000;
-    background-color: var(--primary-dark) !important;
-    color: white !important;
-    font-size: 24px;
-    font-weight: bold;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    line-height: 1; /* Helps normalize vertical alignment for text */
 }
 
 /* Custom dialog panel style for settings */

@@ -1,8 +1,8 @@
 import { gql } from 'apollo-angular';
 
-export const GET_DETECTIONS_FOR_STATION = gql`
-  query detections($last: Int, $stationIds: [ID!]) {
-    detections(last : $last, stationIds: $stationIds) {  
+export const GET_DETECTIONS = gql`
+  query detections($last: Int, $stationIds: [ID!], $after: String) {
+    detections(last: $last, stationIds: $stationIds, period: { count: 24, unit: "hour" }, after: $after) {
       edges {
         cursor
         node {
@@ -18,75 +18,41 @@ export const GET_DETECTIONS_FOR_STATION = gql`
       speciesCount
       totalCount  
       nodes {
+        id
+        certainty
+        confidence
+        eclipse
+        favoriteUrl
+        flagUrl
+        mode
+        probability
+        score
+        speciesId
+        timestamp
+        voteUrl
+        soundscape {
+          url
+          duration
+        }
+        station {
           id
-          probability
-          confidence
-          timestamp
-          score
-          favoriteUrl
-          soundscape {
-            url
-            duration
-            downloadFilename
-          }
-          station {
-            id
-            name
-          }
-          species {
-            color
-            commonName
-            scientificName
-            imageUrl
-            mlUrl
-            wikipediaSummary 
-            wikipediaUrl 
-            range
-            ebirdUrl          
-          }
+          name
         }
-    }
-  }
-`;
-
-export const GET_LAST_DETECTION_FOR_STATION = gql`
-  query detections($stationIds: [ID!]) {
-    detections(stationIds: $stationIds, last:5) {
-        speciesCount
-        totalCount       
-        nodes {
-            certainty
-            confidence
-            eclipse
-            favoriteUrl
-            flagUrl
-            id
-            mode
-            probability
-            score
-            speciesId
-            timestamp
-            voteUrl
-            species {
-                alpha
-                alpha6
-                birdweatherUrl
-                color
-                commonName
-                ebirdCode
-                ebirdUrl
-                id
-                imageCredit
-                imageLicense
-                imageLicenseUrl
-                imageUrl
-                mlUrl
-                scientificName
-                thumbnailUrl
-                wikipediaSummary
-                wikipediaUrl
-            }
+        species {
+          id
+          birdweatherUrl
+          color
+          commonName
+          ebirdCode
+          ebirdUrl          
+          imageUrl
+          mlUrl
+          scientificName
+          thumbnailUrl
+          wikipediaSummary
+          wikipediaUrl
         }
+      }
     }
   }
 `;

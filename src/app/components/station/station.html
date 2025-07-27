@@ -1,10 +1,6 @@
-<button mat-fab class="back-button" type="button" routerLink="/" aria-label="Back to stations list">
-  <mat-icon>arrow_back</mat-icon>
-</button>
 <div class="page-container">
 
   <h2>Station Info</h2>
-
 
   <div *ngIf="loadingMessage" class="loading-indicator">
     <h3>{{ loadingMessage }}</h3>
@@ -21,7 +17,7 @@
     <station-details [station]="station"></station-details>
 
     <!-- Last bird detection -->
-    <bird-detection [stationId]="stationId" [last]="true"></bird-detection>
+    <bird-detection [stationId]="stationId" [last]="10"></bird-detection>
   </mat-card>
   
 </div>

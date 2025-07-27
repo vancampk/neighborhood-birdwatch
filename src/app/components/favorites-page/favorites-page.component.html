@@ -1,0 +1,16 @@
+<div class="page-container">
+
+  <h2>Station Info</h2>
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    <div class="spinner"></div>
+  </div>
+
+  <mat-card class="station" *ngFor="let station of favoriteStations$ | async">
+    <h3 [routerLink]="['/station', station.stationId]">{{ station.stationName }}</h3>
+
+    <!-- Last bird detection -->
+    <bird-detection [stationId]="station.stationId" [last]="10"></bird-detection>
+  </mat-card>
+
+</div>

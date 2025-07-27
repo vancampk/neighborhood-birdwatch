@@ -1,7 +1,7 @@
 import { Component, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Detection } from 'src/app/models/graphql.models';
-import { BirdDataService } from 'src/app/services/bird-data.service';
+import { Detection } from '../../models/graphql.models';
+import { BirdDataService } from '../../services/bird-data.service';
 import { register } from 'swiper/element/bundle';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -19,7 +19,7 @@ register();
 })
 export class BirdDetectionComponent {
   stationId = input.required<number>();
-  last = input.required<boolean>();
+  last = input.required<number>();
 
   detections: Detection[] = [];
   loading: boolean = false;
@@ -68,4 +68,15 @@ export class BirdDetectionComponent {
         }
     }
 
+    truncate(text: string | undefined | null, wordLimit: number): string {
+        if (!text) {
+            return '';
+        }
+        // Split by any whitespace and filter out empty strings
+        const words = text.split(/\s+/).filter(word => word.length > 0);
+        if (words.length <= wordLimit) {
+            return text;
+        }
+        return words.slice(0, wordLimit).join(' ') + '...';
+    }
 }

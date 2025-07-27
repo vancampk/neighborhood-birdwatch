@@ -1,0 +1,32 @@
+/* You can copy the styles from bird-detections.component.css to here */
+.loading-message, .error-message {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+.loading-message {
+  color: gray;
+  background-color: #e0f7fa;
+  color: var(--primary-dark);
+  border: 1px solid var(--primary-dark);
+}
+.error-message {
+  background-color: #ffebee;
+  color: #d32f2f;
+  border: 1px solid #f44336;
+}
+
+.station {
+  background-color: var(--primary-dark);
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 10px;
+}
+
+.station > * {  
+  padding: 10px;
+}
+
+

@@ -38,8 +38,7 @@
                    
                   </div>
                   <div class="species-summary">
-                    <p *ngIf="detection.species.wikipediaSummary" class="summary">{{
-                      detection.species.wikipediaSummary }}</p>
+                    <p *ngIf="detection.species.wikipediaSummary" class="summary">{{ truncate(detection.species.wikipediaSummary, 100) }}</p>
                     <a *ngIf="detection.species.wikipediaUrl" [href]="detection.species.wikipediaUrl" target="_blank"
                       rel="noopener noreferrer">Learn more on Wikipedia</a>
                   </div>

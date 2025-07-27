@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, BehaviorSubject, of, tap, Subscription } from 'rxjs';
+import { Observable, map, BehaviorSubject, of, tap, Subscription, expand, reduce, EMPTY } from 'rxjs';
 import { Apollo } from 'apollo-angular';
-import {  GET_DETECTIONS_FOR_STATION, GET_LAST_DETECTION_FOR_STATION, GET_NEARBY_STATIONS, GET_STATION_BY_ID } from '../queries/graphql.queries';
+import {  GET_DETECTIONS, GET_NEARBY_STATIONS, GET_STATION_BY_ID } from '../queries/graphql.queries';
 import { Station, DetectionConnection, Detection } from '../models/graphql.models';
 import { DETECTION_SUBSCRIPTION } from '../queries/graphql.subscriptions';
 
@@ -65,20 +65,45 @@ export class BirdDataService {
   }
 
 
-  getDetectionsForStations(stationIds: number[], last: boolean): Observable<Detection[]> {
-    console.log("Getting Detections for Stations: " + stationIds.join(', '));
-
-    const query = last ? GET_LAST_DETECTION_FOR_STATION : GET_DETECTIONS_FOR_STATION;
+  getDetectionsForStations(stationIds: number[], pageSize: number = 50): Observable<Detection[]> {
+    console.log(`Getting all detections for Stations: ${stationIds.join(', ')} with page size ${pageSize}`);
 
     // GraphQL expects station IDs as strings.
     const stationIdStrings = stationIds.map(id => id.toString());
 
-    return this.apollo.watchQuery<{ detections: DetectionConnection }>({
-      query: query,
-      variables: {
-        stationIds : stationIdStrings,
-      },
-    }).valueChanges.pipe(map(result => result.data?.detections?.nodes?.filter((d): d is Detection => d !== null) ?? []));
+    // Helper function to fetch a single page of data
+    const fetchPage = (cursor?: string): Observable<{ data: { detections: DetectionConnection } }> => {
+      const variables: { stationIds: string[]; last: number; after?: string } = {
+        stationIds: stationIdStrings,
+        last: pageSize,
+      };
+      if (cursor) {
+        variables.after = cursor;
+      }
+      return this.apollo.query<{ detections: DetectionConnection }>({
+        query: GET_DETECTIONS,
+        variables: variables,
+        fetchPolicy: 'network-only'
+      });
+    };
+
+    // Use `expand` to recursively fetch pages until there are no more.
+    return fetchPage().pipe(
+      expand(response => {
+        const pageInfo = response.data?.detections?.pageInfo;
+        if (pageInfo?.hasNextPage && pageInfo.endCursor) {
+          return fetchPage(pageInfo.endCursor);
+        } else {
+          return EMPTY; // Completes the expand operator when done
+        }
+      }),
+      // Use `reduce` to accumulate all nodes from all pages into a single array
+      reduce((acc: Detection[], response) => {
+        const newNodes = response.data?.detections?.nodes?.filter((d): d is Detection => d !== null) ?? [];
+        return [...acc, ...newNodes];
+      }, []),
+      tap(allDetections => console.log(`Finished fetching all pages. Total detections found: ${allDetections.length}`))
+    );
   }
 
   subscribeToNewDetections(stationId: number): Subscription {
