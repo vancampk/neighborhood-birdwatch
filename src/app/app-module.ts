@@ -7,15 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { GraphQLModule } from './graphql.module';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MatIconModule } from "@angular/material/icon";
-import {MatSidenavModule} from '@angular/material/sidenav';
-import { GlobalControlsComponent } from "./components/global-controls/global-controls.component";
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { GlobalControlsComponent } from './components/global-controls/global-controls.component';
 
 @NgModule({
-  declarations: [
-    App,
-  ],
+  declarations: [App],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,18 +22,10 @@ import { GlobalControlsComponent } from "./components/global-controls/global-con
     FontAwesomeModule,
     MatIconModule,
     MatSidenavModule,
-    GlobalControlsComponent
-],
-  exports: [
-    App,
-    CommonModule,
-    FontAwesomeModule    
+    GlobalControlsComponent,
   ],
-  providers: [
-    provideBrowserGlobalErrorListeners()
-  ],
-  bootstrap: [App]
+  exports: [App, CommonModule, FontAwesomeModule],
+  providers: [provideBrowserGlobalErrorListeners()],
+  bootstrap: [App],
 })
-export class AppModule { 
- 
-}
+export class AppModule {}

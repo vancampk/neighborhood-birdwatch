@@ -7,7 +7,7 @@ import { SettingsService } from './settings.service';
 import { Coordinates } from '../models/coordinates.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocationService {
   private locationSubject = new BehaviorSubject<Coordinates | null>(null);
@@ -41,11 +41,11 @@ export class LocationService {
           (position: GeolocationPosition) => {
             observer.next({
               latitude: position.coords.latitude,
-              longitude: position.coords.longitude
+              longitude: position.coords.longitude,
             });
             observer.complete();
           },
-          (error: GeolocationPositionError) => observer.error(error)
+          (error: GeolocationPositionError) => observer.error(error),
         );
       } else {
         observer.error('Geolocation is not supported by this browser.');
@@ -55,11 +55,13 @@ export class LocationService {
 
   getCoordinatesForCity(city: string): Observable<Coordinates> {
     if (!environment.mapboxAccessToken) {
-      return throwError(() => new Error('Mapbox access token is not configured.'));
+      return throwError(
+        () => new Error('Mapbox access token is not configured.'),
+      );
     }
     const url = `${this.mapboxApiUrl}/${encodeURIComponent(city)}.json?access_token=${environment.mapboxAccessToken}&limit=1`;
     return this.http.get<any>(url).pipe(
-      map(response => {
+      map((response) => {
         if (response.features && response.features.length > 0) {
           const feature = response.features[0];
           const [longitude, latitude] = feature.center;
@@ -70,7 +72,9 @@ export class LocationService {
           coords.city = feature.text;
 
           // The `context` array contains parent administrative areas.
-          const region = feature.context?.find((c: any) => c.id.startsWith('region'));
+          const region = feature.context?.find((c: any) =>
+            c.id.startsWith('region'),
+          );
           if (region) {
             coords.state = region.text;
           }
@@ -78,7 +82,11 @@ export class LocationService {
         }
         throw new Error('City not found.');
       }),
-      catchError(() => throwError(() => new Error('Could not find coordinates for the specified city.')))
+      catchError(() =>
+        throwError(
+          () => new Error('Could not find coordinates for the specified city.'),
+        ),
+      ),
     );
   }
 
@@ -89,19 +97,23 @@ export class LocationService {
    */
   getCityForCoordinates(coords: Coordinates): Observable<Coordinates> {
     if (!environment.mapboxAccessToken) {
-      return throwError(() => new Error('Mapbox access token is not configured.'));
+      return throwError(
+        () => new Error('Mapbox access token is not configured.'),
+      );
     }
     const url = `${this.mapboxApiUrl}/${coords.longitude},${coords.latitude}.json?types=place&access_token=${environment.mapboxAccessToken}`;
 
     return this.http.get<any>(url).pipe(
-      map(response => {
+      map((response) => {
         if (response.features && response.features.length > 0) {
           const feature = response.features[0];
           const updatedCoords: Coordinates = { ...coords };
 
           updatedCoords.city = feature.text;
 
-          const region = feature.context?.find((c: any) => c.id.startsWith('region'));
+          const region = feature.context?.find((c: any) =>
+            c.id.startsWith('region'),
+          );
           if (region) {
             updatedCoords.state = region.text;
           }
@@ -109,7 +121,9 @@ export class LocationService {
         }
         throw new Error('Could not determine city for coordinates.');
       }),
-      catchError(() => throwError(() => new Error('Failed to fetch city for coordinates.')))
+      catchError(() =>
+        throwError(() => new Error('Failed to fetch city for coordinates.')),
+      ),
     );
   }
 
@@ -122,15 +136,15 @@ export class LocationService {
     return this.getCurrentPosition().pipe(
       // Use switchMap to chain the geocoding call.
       // If a new request starts, the previous geocoding call is cancelled.
-      switchMap(coords => this.getCityForCoordinates(coords)),
+      switchMap((coords) => this.getCityForCoordinates(coords)),
       // Use tap for the side-effect of setting the location in the service.
-      tap(fullCoords => this.setLocation(fullCoords)),
-      catchError(error => {
+      tap((fullCoords) => this.setLocation(fullCoords)),
+      catchError((error) => {
         // Log the error for debugging purposes.
         console.error('Could not fetch and set user location:', error);
         // Re-throw the original error to be handled by the component.
         return throwError(() => error);
-      })
+      }),
     );
   }
 
@@ -144,7 +158,7 @@ export class LocationService {
   distanceInMilesBetweenEarthCoordinates(lat2: number, lon2: number): number {
     const userCoords = this.getCurrentLocationValue();
     if (!userCoords) {
-        return -1;
+      return -1;
     }
     const earthRadiusMi = 3958.7564;
 
@@ -154,8 +168,12 @@ export class LocationService {
     const localUserLat = this.degreesToRadians(userCoords.latitude);
     lat2 = this.degreesToRadians(lat2);
 
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(localUserLat) * Math.cos(lat2);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.sin(dLon / 2) *
+        Math.sin(dLon / 2) *
+        Math.cos(localUserLat) *
+        Math.cos(lat2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
     return earthRadiusMi * c;
@@ -169,22 +187,26 @@ export class LocationService {
    */
   convertCoordsToDMS(lat: number, lon: number): { lat: string; lon: string } {
     return {
-        lat: this.toDMS(lat, 'N', 'S'),
-        lon: this.toDMS(lon, 'E', 'W'),
+      lat: this.toDMS(lat, 'N', 'S'),
+      lon: this.toDMS(lon, 'E', 'W'),
     };
   }
 
   private degreesToRadians(degrees: number): number {
-      return degrees * Math.PI / 180;
+    return (degrees * Math.PI) / 180;
   }
 
-  private toDMS(coord: number, positiveDir: string, negativeDir: string): string {
-      const direction = coord >= 0 ? positiveDir : negativeDir;
-      const absolute = Math.abs(coord);
-      const degrees = Math.floor(absolute);
-      const minutesNotTruncated = (absolute - degrees) * 60;
-      const minutes = Math.floor(minutesNotTruncated);
-      const seconds = Math.floor((minutesNotTruncated - minutes) * 60);
-      return `${degrees}° ${minutes}' ${seconds}" ${direction}`;
+  private toDMS(
+    coord: number,
+    positiveDir: string,
+    negativeDir: string,
+  ): string {
+    const direction = coord >= 0 ? positiveDir : negativeDir;
+    const absolute = Math.abs(coord);
+    const degrees = Math.floor(absolute);
+    const minutesNotTruncated = (absolute - degrees) * 60;
+    const minutes = Math.floor(minutesNotTruncated);
+    const seconds = Math.floor((minutesNotTruncated - minutes) * 60);
+    return `${degrees}° ${minutes}' ${seconds}" ${direction}`;
   }
 }

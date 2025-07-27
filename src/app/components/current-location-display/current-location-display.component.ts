@@ -10,7 +10,7 @@ import { LocationService } from '../../services/location.service';
   standalone: true,
   imports: [CommonModule, MatDividerModule],
   templateUrl: './current-location-display.component.html',
-  styleUrls: ['./current-location-display.component.scss']
+  styleUrls: ['./current-location-display.component.scss'],
 })
 export class CurrentLocationDisplayComponent {
   currentLocation$: Observable<Coordinates | null>;

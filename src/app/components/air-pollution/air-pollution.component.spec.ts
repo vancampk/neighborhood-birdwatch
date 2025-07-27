@@ -8,9 +8,8 @@ describe('AirPollution', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AirPollutionComponent]
-    })
-    .compileComponents();
+      declarations: [AirPollutionComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AirPollutionComponent);
     component = fixture.componentInstance;

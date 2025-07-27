@@ -1,4 +1,9 @@
-import { Component, input, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {
+  Component,
+  input,
+  ViewEncapsulation,
+  CUSTOM_ELEMENTS_SCHEMA,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Detection } from '../../models/graphql.models';
 import { BirdDataService } from '../../services/bird-data.service';
@@ -26,57 +31,66 @@ export class BirdDetectionComponent {
   loadingMessage: string = '';
   error: string = '';
 
-   constructor(
-        private birdDataService: BirdDataService,        
-    ) { }
+  constructor(private birdDataService: BirdDataService) {}
 
   ngOnInit(): void {
     this.fetchLastDetection();
   }
 
+  fetchLastDetection(): void {
+    if (this.stationId) {
+      this.loading = true;
+      this.loadingMessage = 'Loading detections...';
+      this.error = '';
+      this.birdDataService
+        .getDetectionsForStations([this.stationId()], this.last())
+        .subscribe({
+          next: (detections) => {
+            const latestDetectionsBySpecies = new Map<number, Detection>();
 
- fetchLastDetection(): void{
-        if(this.stationId){
-            this.loading = true;
-            this.loadingMessage = 'Loading detections...';
-            this.error = '';
-            this.birdDataService.getDetectionsForStations([this.stationId()], this.last()).subscribe({
-                next: (detections) => {
-                    const latestDetectionsBySpecies = new Map<number, Detection>();
+            detections.forEach((detection: Detection) => {
+              const speciesId = parseInt(detection.species.id);
+              const existingDetection =
+                latestDetectionsBySpecies.get(speciesId);
 
-                    detections.forEach((detection: Detection) => {
-                        const speciesId = parseInt(detection.species.id);
-                        const existingDetection = latestDetectionsBySpecies.get(speciesId);
-                
-                        if (!existingDetection || new Date(detection.timestamp) > new Date(existingDetection.timestamp)) {
-                            latestDetectionsBySpecies.set(speciesId, detection);
-                        }
-                    });
-
-                    this.detections = Array.from(latestDetectionsBySpecies.values())
-                        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-                    this.loading = false;
-                    this.loadingMessage = '';
-                },
-                error: (err) => {
-                  console.error('Error fetching detections:', err);
-                    this.loading = false;
-                    this.error = 'Failed to fetch detections. Please try again later.';
-                    this.loadingMessage = '';
-                }
+              if (
+                !existingDetection ||
+                new Date(detection.timestamp) >
+                  new Date(existingDetection.timestamp)
+              ) {
+                latestDetectionsBySpecies.set(speciesId, detection);
+              }
             });
-        }
-    }
 
-    truncate(text: string | undefined | null, wordLimit: number): string {
-        if (!text) {
-            return '';
-        }
-        // Split by any whitespace and filter out empty strings
-        const words = text.split(/\s+/).filter(word => word.length > 0);
-        if (words.length <= wordLimit) {
-            return text;
-        }
-        return words.slice(0, wordLimit).join(' ') + '...';
+            this.detections = Array.from(
+              latestDetectionsBySpecies.values(),
+            ).sort(
+              (a, b) =>
+                new Date(b.timestamp).getTime() -
+                new Date(a.timestamp).getTime(),
+            );
+            this.loading = false;
+            this.loadingMessage = '';
+          },
+          error: (err) => {
+            console.error('Error fetching detections:', err);
+            this.loading = false;
+            this.error = 'Failed to fetch detections. Please try again later.';
+            this.loadingMessage = '';
+          },
+        });
     }
+  }
+
+  truncate(text: string | undefined | null, wordLimit: number): string {
+    if (!text) {
+      return '';
+    }
+    // Split by any whitespace and filter out empty strings
+    const words = text.split(/\s+/).filter((word) => word.length > 0);
+    if (words.length <= wordLimit) {
+      return text;
+    }
+    return words.slice(0, wordLimit).join(' ') + '...';
+  }
 }

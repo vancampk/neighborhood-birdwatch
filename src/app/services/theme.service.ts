@@ -13,28 +13,28 @@ export const THEMES = [
   'mallard-duck-theme',
   'loon-theme',
   'painted-bunting-theme',
-  'lazuli-bunting-theme'
+  'lazuli-bunting-theme',
 ];
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
   private renderer: Renderer2;
 
   constructor(
     rendererFactory: RendererFactory2,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
   ) {
     this.renderer = rendererFactory.createRenderer(null, null);
-    this.settingsService.settings$.subscribe(settings => {
+    this.settingsService.settings$.subscribe((settings) => {
       this.updateBodyClass(settings.theme);
     });
   }
 
   private updateBodyClass(themeName: string) {
     // Remove all possible theme classes
-    THEMES.forEach(theme => {
+    THEMES.forEach((theme) => {
       this.renderer.removeClass(document.body, theme);
     });
     // Add the new theme class

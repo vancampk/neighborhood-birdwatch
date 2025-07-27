@@ -9,8 +9,8 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { NgModule } from '@angular/core';
 
-const uri = 'https://app.birdweather.com/graphql'; 
-const wsUri = 'wss://app.birdweather.com/graphql'; 
+const uri = 'https://app.birdweather.com/graphql';
+const wsUri = 'wss://app.birdweather.com/graphql';
 
 @NgModule({
   providers: [
@@ -20,12 +20,14 @@ const wsUri = 'wss://app.birdweather.com/graphql';
       const http = httpLink.create({
         uri: uri,
       });
-    
+
       // WebSocket link:
-      const ws = new GraphQLWsLink(createClient({
-        url: uri,
-      }));
-    
+      const ws = new GraphQLWsLink(
+        createClient({
+          url: uri,
+        }),
+      );
+
       //  use split links to determine what kind of query we are sending and what should be used as the link method
       const link = split(
         ({ query }) => {
@@ -38,12 +40,12 @@ const wsUri = 'wss://app.birdweather.com/graphql';
         ws,
         http,
       );
-    
+
       return {
         link,
         cache: new InMemoryCache(),
       };
-    })
-  ]
+    }),
+  ],
 })
-export class GraphQLModule { }
+export class GraphQLModule {}

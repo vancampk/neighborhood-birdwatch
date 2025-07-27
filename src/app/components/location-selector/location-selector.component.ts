@@ -9,7 +9,10 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { LocationService } from '../../services/location.service';
 import { Coordinates } from '../../models/coordinates.model';
-import { SettingsService, LocationPreference } from '../../services/settings.service';
+import {
+  SettingsService,
+  LocationPreference,
+} from '../../services/settings.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { CurrentLocationDisplayComponent } from '../current-location-display/current-location-display.component';
 
@@ -26,10 +29,10 @@ import { CurrentLocationDisplayComponent } from '../current-location-display/cur
     MatDialogModule,
     MatIconModule,
     MatDividerModule,
-    CurrentLocationDisplayComponent
+    CurrentLocationDisplayComponent,
   ],
   templateUrl: './location-selector.component.html',
-  styleUrls: ['./location-selector.component.scss']
+  styleUrls: ['./location-selector.component.scss'],
 })
 export class LocationSelectorComponent implements OnInit {
   citySearch: string = '';
@@ -38,7 +41,7 @@ export class LocationSelectorComponent implements OnInit {
 
   constructor(
     private locationService: LocationService,
-    public dialogRef: MatDialogRef<LocationSelectorComponent>
+    public dialogRef: MatDialogRef<LocationSelectorComponent>,
   ) {}
 
   ngOnInit(): void {}
@@ -55,18 +58,21 @@ export class LocationSelectorComponent implements OnInit {
         this.isLoading = false;
         if (err instanceof GeolocationPositionError) {
           if (err.code === err.PERMISSION_DENIED) {
-            this.errorMessage = 'Location permission was denied. Please enable it in your browser settings or search for a city.';
+            this.errorMessage =
+              'Location permission was denied. Please enable it in your browser settings or search for a city.';
           } else {
-            this.errorMessage = 'Could not get your location. Please try again or search for a city.';
+            this.errorMessage =
+              'Could not get your location. Please try again or search for a city.';
           }
         } else if (err instanceof Error) {
           this.errorMessage = err.message;
         } else if (typeof err === 'string') {
           this.errorMessage = err;
         } else {
-          this.errorMessage = 'An unknown error occurred while fetching your location.';
+          this.errorMessage =
+            'An unknown error occurred while fetching your location.';
         }
-      }
+      },
     });
   }
 
@@ -85,7 +91,7 @@ export class LocationSelectorComponent implements OnInit {
       error: (err) => {
         this.isLoading = false;
         this.errorMessage = err.message || 'Failed to find the city.';
-      }
+      },
     });
   }
 }

@@ -10,17 +10,16 @@ import { environment } from 'src/environments/environment';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './station-map.html',
-  styleUrl: './station-map.scss'
+  styleUrl: './station-map.scss',
 })
 export class StationMap {
   station = input.required<Station>();
   private locationService = inject(LocationService);
   public mapStatusService = inject(MapStatusService);
 
-  public Map(locationService: LocationService){
+  public Map(locationService: LocationService) {
     this.locationService = locationService;
   }
-
 
   public mapboxMapUrl = computed<string | null>(() => {
     if (this.mapStatusService.isApiLimitReached()) {

@@ -8,9 +8,8 @@ describe('LiveDetection', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LiveDetection]
-    })
-    .compileComponents();
+      declarations: [LiveDetection],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LiveDetection);
     component = fixture.componentInstance;

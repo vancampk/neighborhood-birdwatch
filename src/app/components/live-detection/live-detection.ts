@@ -18,16 +18,18 @@ export class LiveDetectionsComponent implements OnInit, OnDestroy {
   private detectionsSubscription: Subscription | undefined;
   private gqlSubscription: Subscription | undefined;
 
-  constructor(private birdDataService: BirdDataService) { }
+  constructor(private birdDataService: BirdDataService) {}
 
   ngOnInit(): void {
     // Start listening for new detections from the service.
     if (this.stationId() > 0) {
-      this.gqlSubscription = this.birdDataService.subscribeToNewDetections(this.stationId());
+      this.gqlSubscription = this.birdDataService.subscribeToNewDetections(
+        this.stationId(),
+      );
 
       // Subscribe to the stream of new detections to update the UI.
-      this.detectionsSubscription = this.birdDataService.newDetections$.subscribe(
-        (newDetections) => {
+      this.detectionsSubscription =
+        this.birdDataService.newDetections$.subscribe((newDetections) => {
           if (newDetections && newDetections.length > 0) {
             this.detections.unshift(...newDetections);
 
@@ -35,8 +37,7 @@ export class LiveDetectionsComponent implements OnInit, OnDestroy {
               this.detections.splice(20);
             }
           }
-        }
-      );
+        });
     }
   }
 

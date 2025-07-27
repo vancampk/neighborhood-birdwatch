@@ -10,8 +10,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import { ThemeService, THEMES } from '../../services/theme.service';
 import { SettingsService, AppSettings } from '../../services/settings.service';
-import { CurrentLocationDisplayComponent } from "../current-location-display/current-location-display.component";
-import { LocalStorageInspectorComponent } from "../local-storage-inspector/local-storage-inspector.component";
+import { CurrentLocationDisplayComponent } from '../current-location-display/current-location-display.component';
+import { LocalStorageInspectorComponent } from '../local-storage-inspector/local-storage-inspector.component';
 
 @Component({
   selector: 'app-settings-panel',
@@ -26,10 +26,10 @@ import { LocalStorageInspectorComponent } from "../local-storage-inspector/local
     MatFormFieldModule,
     MatRadioModule,
     CurrentLocationDisplayComponent,
-    LocalStorageInspectorComponent
-],
+    LocalStorageInspectorComponent,
+  ],
   templateUrl: './settings-panel.component.html',
-  styleUrls: ['./settings-panel.component.scss']
+  styleUrls: ['./settings-panel.component.scss'],
 })
 export class SettingsPanelComponent implements OnInit, OnDestroy {
   availableThemes = THEMES;
@@ -38,16 +38,18 @@ export class SettingsPanelComponent implements OnInit, OnDestroy {
 
   constructor(
     private themeService: ThemeService,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
   ) {}
 
   ngOnInit(): void {
     // Subscribe to settings changes to keep the panel's state in sync.
     // This is crucial for reflecting changes made elsewhere, like the "Clear & Reset" button.
-    this.settingsSub = this.settingsService.settings$.subscribe(currentSettings => {
-      // Create a copy to avoid potential issues with two-way data binding (ngModel) directly mutating the service's state object.
-      this.settings = { ...currentSettings };
-    });
+    this.settingsSub = this.settingsService.settings$.subscribe(
+      (currentSettings) => {
+        // Create a copy to avoid potential issues with two-way data binding (ngModel) directly mutating the service's state object.
+        this.settings = { ...currentSettings };
+      },
+    );
   }
 
   onSettingsChange(): void {

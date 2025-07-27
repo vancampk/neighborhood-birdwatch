@@ -1,23 +1,36 @@
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+export type MakeEmpty<
+  T extends { [key: string]: unknown },
+  K extends keyof T,
+> = { [_ in K]?: never };
+export type Incremental<T> =
+  | T
+  | {
+      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
+    };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-  BigInt: { input: any; output: any; }
-  ISO8601Date: { input: any; output: any; }
-  ISO8601DateTime: { input: any; output: any; }
-  JSON: { input: any; output: any; }
-  SpeciesCountKey: { input: any; output: any; }
-  TimeZone: { input: any; output: any; }
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
+  BigInt: { input: any; output: any };
+  ISO8601Date: { input: any; output: any };
+  ISO8601DateTime: { input: any; output: any };
+  JSON: { input: any; output: any };
+  SpeciesCountKey: { input: any; output: any };
+  TimeZone: { input: any; output: any };
 };
 
 export type AccelReading = {
@@ -410,7 +423,7 @@ export enum ProbabilityModel {
   /** Fogleman */
   Fogleman = 'FOGLEMAN',
   /** iNaturalist */
-  Inaturalist = 'INATURALIST'
+  Inaturalist = 'INATURALIST',
 }
 
 export type Query = {
@@ -435,7 +448,6 @@ export type Query = {
   topSpecies: Array<SpeciesCount>;
 };
 
-
 export type QueryAllSpeciesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
@@ -443,7 +455,6 @@ export type QueryAllSpeciesArgs = {
   ids: Array<Scalars['ID']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 export type QueryBirdnetSightingsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -458,7 +469,6 @@ export type QueryBirdnetSightingsArgs = {
   sw?: InputMaybe<InputLocation>;
 };
 
-
 export type QueryCountsArgs = {
   ne?: InputMaybe<InputLocation>;
   period?: InputMaybe<InputDuration>;
@@ -468,13 +478,11 @@ export type QueryCountsArgs = {
   sw?: InputMaybe<InputLocation>;
 };
 
-
 export type QueryDailyDetectionCountsArgs = {
   period?: InputMaybe<InputDuration>;
   speciesIds?: InputMaybe<Array<Scalars['ID']['input']>>;
   stationIds?: InputMaybe<Array<Scalars['ID']['input']>>;
 };
-
 
 export type QueryDetectionsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -514,13 +522,11 @@ export type QueryDetectionsArgs = {
   vote?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 export type QueryEbirdSightingsArgs = {
   center: InputLocation;
   period?: InputMaybe<InputDuration>;
   speciesId: Scalars['ID']['input'];
 };
-
 
 export type QuerySearchSpeciesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -532,17 +538,14 @@ export type QuerySearchSpeciesArgs = {
   searchLocale?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QuerySpeciesArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
   scientificName?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryStationArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type QueryStationsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -554,7 +557,6 @@ export type QueryStationsArgs = {
   query?: InputMaybe<Scalars['String']['input']>;
   sw?: InputMaybe<InputLocation>;
 };
-
 
 export type QueryTimeOfDayDetectionCountsArgs = {
   confidenceGt?: InputMaybe<Scalars['Float']['input']>;
@@ -578,7 +580,6 @@ export type QueryTimeOfDayDetectionCountsArgs = {
   timeOfDayLte?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 export type QueryTopBirdnetSpeciesArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   ne?: InputMaybe<InputLocation>;
@@ -587,7 +588,6 @@ export type QueryTopBirdnetSpeciesArgs = {
   speciesId?: InputMaybe<Scalars['ID']['input']>;
   sw?: InputMaybe<InputLocation>;
 };
-
 
 export type QueryTopSpeciesArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -637,7 +637,6 @@ export type Sensors = {
   systemHistory: SystemReadingConnection;
 };
 
-
 /** Container type for PUC sensor readings */
 export type SensorsAccelHistoryArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -646,7 +645,6 @@ export type SensorsAccelHistoryArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   period?: InputMaybe<InputDuration>;
 };
-
 
 /** Container type for PUC sensor readings */
 export type SensorsDetectionsHistoryArgs = {
@@ -657,7 +655,6 @@ export type SensorsDetectionsHistoryArgs = {
   period?: InputMaybe<InputDuration>;
 };
 
-
 /** Container type for PUC sensor readings */
 export type SensorsEnvironmentHistoryArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -666,7 +663,6 @@ export type SensorsEnvironmentHistoryArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   period?: InputMaybe<InputDuration>;
 };
-
 
 /** Container type for PUC sensor readings */
 export type SensorsLightHistoryArgs = {
@@ -677,7 +673,6 @@ export type SensorsLightHistoryArgs = {
   period?: InputMaybe<InputDuration>;
 };
 
-
 /** Container type for PUC sensor readings */
 export type SensorsLocationHistoryArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -687,7 +682,6 @@ export type SensorsLocationHistoryArgs = {
   period?: InputMaybe<InputDuration>;
 };
 
-
 /** Container type for PUC sensor readings */
 export type SensorsMagHistoryArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -696,7 +690,6 @@ export type SensorsMagHistoryArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   period?: InputMaybe<InputDuration>;
 };
-
 
 /** Container type for PUC sensor readings */
 export type SensorsSystemHistoryArgs = {
@@ -812,7 +805,6 @@ export type Species = Record & {
   wikipediaUrl?: Maybe<Scalars['String']['output']>;
 };
 
-
 export type SpeciesDetectionCountsArgs = {
   group?: InputMaybe<Scalars['Int']['input']>;
   ne?: InputMaybe<InputLocation>;
@@ -821,13 +813,11 @@ export type SpeciesDetectionCountsArgs = {
   sw?: InputMaybe<InputLocation>;
 };
 
-
 export type SpeciesProbabilitiesArgs = {
   model: ProbabilityModel;
   ne?: InputMaybe<InputLocation>;
   sw?: InputMaybe<InputLocation>;
 };
-
 
 export type SpeciesStationsArgs = {
   ne?: InputMaybe<InputLocation>;
@@ -836,7 +826,6 @@ export type SpeciesStationsArgs = {
   sw?: InputMaybe<InputLocation>;
 };
 
-
 export type SpeciesTopDetectionsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
@@ -844,7 +833,6 @@ export type SpeciesTopDetectionsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   period?: InputMaybe<InputDuration>;
 };
-
 
 export type SpeciesTranslationsArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -977,12 +965,10 @@ export type Station = Record & {
   weather?: Maybe<WeatherReading>;
 };
 
-
 /** A BirdWeather station (either real or virtual). */
 export type StationCountsArgs = {
   period?: InputMaybe<InputDuration>;
 };
-
 
 /** A BirdWeather station (either real or virtual). */
 export type StationDetectionCountsArgs = {
@@ -1006,7 +992,6 @@ export type StationDetectionCountsArgs = {
   timeOfDayLte?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** A BirdWeather station (either real or virtual). */
 export type StationDetectionsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -1015,13 +1000,11 @@ export type StationDetectionsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 /** A BirdWeather station (either real or virtual). */
 export type StationSensorsArgs = {
   fieldName?: InputMaybe<Scalars['String']['input']>;
   sensorType?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 /** A BirdWeather station (either real or virtual). */
 export type StationTimeOfDayDetectionCountsArgs = {
@@ -1044,7 +1027,6 @@ export type StationTimeOfDayDetectionCountsArgs = {
   timeOfDayGte?: InputMaybe<Scalars['Int']['input']>;
   timeOfDayLte?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 /** A BirdWeather station (either real or virtual). */
 export type StationTopSpeciesArgs = {
@@ -1091,7 +1073,6 @@ export type Subscription = {
   __typename?: 'Subscription';
   newDetection: NewDetectionPayload;
 };
-
 
 export type SubscriptionNewDetectionArgs = {
   classifications?: InputMaybe<Array<Scalars['String']['input']>>;

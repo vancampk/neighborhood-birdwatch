@@ -9,7 +9,7 @@ import { SettingsService, SETTINGS_KEY } from '../../services/settings.service';
   standalone: true,
   imports: [CommonModule, MatButtonModule],
   templateUrl: './local-storage-inspector.component.html',
-  styleUrls: ['./local-storage-inspector.component.scss']
+  styleUrls: ['./local-storage-inspector.component.scss'],
 })
 export class LocalStorageInspectorComponent implements OnInit, OnDestroy {
   readonly storageKey = SETTINGS_KEY;
@@ -34,7 +34,9 @@ export class LocalStorageInspectorComponent implements OnInit, OnDestroy {
       this.storedSettings = rawData ? JSON.parse(rawData) : null;
     } catch (e) {
       console.error('Error reading or parsing from local storage', e);
-      this.storedSettings = { error: 'Could not parse data from local storage.' };
+      this.storedSettings = {
+        error: 'Could not parse data from local storage.',
+      };
       this.hasData = true;
     }
   }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { LocationService, } from '../../services/location.service';
+import { LocationService } from '../../services/location.service';
 import { LocationSelectorComponent } from '../location-selector/location-selector.component';
 import { StationsComponent } from '../stations/stations';
 import { Coordinates } from '../../models/coordinates.model';
@@ -12,13 +12,7 @@ import { SettingsService } from '../../services/settings.service';
 @Component({
   selector: 'main-page',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatDialogModule,
-    MatButtonModule,
-    LocationSelectorComponent,
-    StationsComponent
-  ],
+  imports: [CommonModule, MatDialogModule, MatButtonModule, StationsComponent],
   templateUrl: './main-page.component.html',
 })
 export class MainPageComponent implements OnInit, OnDestroy {
@@ -28,20 +22,20 @@ export class MainPageComponent implements OnInit, OnDestroy {
   constructor(
     private locationService: LocationService,
     private dialog: MatDialog,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
   ) {}
 
   ngOnInit(): void {
     const settings = this.settingsService.getSettings();
     this.subscriptions.add(
-      this.locationService.location$.subscribe(location => {
+      this.locationService.location$.subscribe((location) => {
         this.currentLocation = location;
         if (!location) {
           this.openLocationSelector(true);
         } else if (settings.preferredLocationMethod === 'prompt') {
           this.openLocationSelector(false);
         }
-      })
+      }),
     );
   }
 

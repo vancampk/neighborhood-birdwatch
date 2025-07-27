@@ -5,7 +5,7 @@ import { Injectable, signal } from '@angular/core';
  * This can be due to service issues or api monthly limits being reached
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MapStatusService {
   public isApiLimitReached = signal(false);

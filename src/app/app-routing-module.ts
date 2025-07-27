@@ -7,12 +7,12 @@ import { FavoritesPageComponent } from './components/favorites-page/favorites-pa
 const routes: Routes = [
   { path: '', component: MainPageComponent },
   { path: 'station/:id', component: StationDetectionsComponent },
-  { path: 'favorites', component: FavoritesPageComponent},
-  { path: '**', redirectTo: '' } // Optional: Wildcard route for a 404 page
+  { path: 'favorites', component: FavoritesPageComponent },
+  { path: '**', redirectTo: '' }, // Optional: Wildcard route for a 404 page
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

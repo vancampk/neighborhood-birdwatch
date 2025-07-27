@@ -21,32 +21,33 @@ export class WeatherComponent {
   loadingMessage: string = '';
   error: string = '';
 
-
-  constructor(private weatherService: WeatherService) { }
+  constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
     this.fetchWeather();
   }
 
   fetchWeather(): void {
-        if(this.lattitude() && this.longitude()){
-            // get now date
-            var date = new Date().toISOString();
-            this.loading = true;
-            this.error = '';
-            this.loadingMessage = 'Loading weather data...';
+    if (this.lattitude() && this.longitude()) {
+      // get now date
+      var date = new Date().toISOString();
+      this.loading = true;
+      this.error = '';
+      this.loadingMessage = 'Loading weather data...';
 
-            this.weatherService.getWeatherData(this.lattitude(), this.longitude(), date).then(data => {
-                this.weather = data;
-                this.loading = false;
-                this.loadingMessage = '';
-            })
-            .catch(error => {
-                console.error('Error fetching weather data:', error);
-                this.loading = false;
-                this.error = 'Failed to fetch weather data. Please try again later.';
-                this.loadingMessage = '';
-            });
-        }
+      this.weatherService
+        .getWeatherData(this.lattitude(), this.longitude(), date)
+        .then((data) => {
+          this.weather = data;
+          this.loading = false;
+          this.loadingMessage = '';
+        })
+        .catch((error) => {
+          console.error('Error fetching weather data:', error);
+          this.loading = false;
+          this.error = 'Failed to fetch weather data. Please try again later.';
+          this.loadingMessage = '';
+        });
     }
+  }
 }

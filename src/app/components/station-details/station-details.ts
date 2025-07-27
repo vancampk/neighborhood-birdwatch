@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { LocationService } from '../../services/location.service';
 import { MapStatusService } from '../../services/map-status.service';
 import { WeatherComponent } from '../weather/weather';
-import { FavoriteButtonComponent } from "../favorite-button/favorite-button.component";
+import { FavoriteButtonComponent } from '../favorite-button/favorite-button.component';
 
 @Component({
   selector: 'station-details',
@@ -19,8 +19,8 @@ export class StationDetails {
   private locationService = inject(LocationService);
   public mapStatusService = inject(MapStatusService);
 
-  public StationDetails(locationService: LocationService){
-    this.locationService = locationService;    
+  public StationDetails(locationService: LocationService) {
+    this.locationService = locationService;
   }
 
   public distance = computed(() => {
@@ -29,9 +29,13 @@ export class StationDetails {
     if (!stationCoords || !userCoords) {
       return null;
     }
-    return this.locationService.distanceInMilesBetweenEarthCoordinates(stationCoords.lat, stationCoords.lon).toFixed(2);
+    return this.locationService
+      .distanceInMilesBetweenEarthCoordinates(
+        stationCoords.lat,
+        stationCoords.lon,
+      )
+      .toFixed(2);
   });
-
 
   public dmsCoords = computed<{ lat: string; lon: string } | null>(() => {
     const coords = this.station()?.coords;
@@ -40,7 +44,6 @@ export class StationDetails {
     }
     return this.locationService.convertCoordsToDMS(coords.lat, coords.lon);
   });
-
 
   public mapboxMapUrl = computed<string | null>(() => {
     if (this.mapStatusService.isApiLimitReached()) {
