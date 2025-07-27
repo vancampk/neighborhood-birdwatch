@@ -65,15 +65,18 @@ export class BirdDataService {
   }
 
 
-  getDetectionsForStation(stationId: number, last: boolean): Observable<Detection[]> {
-    console.log("Getting Detections for Station: " + stationId);
+  getDetectionsForStations(stationIds: number[], last: boolean): Observable<Detection[]> {
+    console.log("Getting Detections for Stations: " + stationIds.join(', '));
 
     const query = last ? GET_LAST_DETEACTION_FOR_STATION : GET_DETECTIONS_FOR_STATION;
+
+    // GraphQL expects station IDs as strings.
+    const stationIdStrings = stationIds.map(id => id.toString());
 
     return this.apollo.watchQuery<{ detections: DetectionConnection }>({
       query: query,
       variables: {
-        stationIds : [stationId],
+        stationIds : stationIdStrings,
       },
     }).valueChanges.pipe(map(result => result.data?.detections?.nodes?.filter((d): d is Detection => d !== null) ?? []));
   }

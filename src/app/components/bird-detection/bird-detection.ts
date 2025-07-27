@@ -40,7 +40,7 @@ export class BirdDetectionComponent {
             this.loading = true;
             this.loadingMessage = 'Loading detections...';
             this.error = '';
-            this.birdDataService.getDetectionsForStation(this.stationId(), this.last()).subscribe({
+            this.birdDataService.getDetectionsForStations([this.stationId()], this.last()).subscribe({
                 next: (detections) => {
                     const latestDetectionsBySpecies = new Map<number, Detection>();
 

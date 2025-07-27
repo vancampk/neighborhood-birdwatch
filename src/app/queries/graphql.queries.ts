@@ -29,6 +29,10 @@ export const GET_DETECTIONS_FOR_STATION = gql`
             duration
             downloadFilename
           }
+          station {
+            id
+            name
+          }
           species {
             color
             commonName
