@@ -2,9 +2,7 @@
   background-color: var(--primary-light);
   padding: 1rem 1.5rem;
   border-radius: 8px;
-  border: 1px solid var(--mat-divider-color, rgba(0, 0, 0, 0.12));
-  margin: 1rem;
-  
+  border: 1px solid var(--mat-divider-color, rgba(0, 0, 0, 0.12));  
 }
 
 .station-header {
@@ -50,7 +48,6 @@
   flex: 1 1 300px; /* Flex-grow, flex-shrink, flex-basis */
   min-width: 250px;
   position: sticky; // Make map sticky on scroll
-  top: 1rem; // Offset from the top of the viewport
 }
 
 .map-container {
