@@ -109,7 +109,7 @@ h2, h3, h4{
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border-left-color: var(--primary-dark);
+  border-left-color: var(--secondary-light);
   animation: spin 1s ease infinite;
   margin: 10px auto;
 }
@@ -136,17 +136,14 @@ h2, h3, h4{
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
-  padding: 2rem;
+  padding: 0rem, 2rem;
   width: 100%;
   box-sizing: border-box;
 }
 
 .loading-indicator, .error-message, .no-detections {
   text-align: center;
-  color: gray;
-  background-color: #e0f7fa;
   border-radius: 4px;
-  width: 75vw;
   padding: 10px;
   margin: 10px;
 }
