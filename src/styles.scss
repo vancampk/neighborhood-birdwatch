@@ -56,6 +56,34 @@ body.robin-theme {
   --secondary-light: #81d4fa;/* Light Blue Egg Color */
 }
 
+/* Mallard Duck Theme */
+body.mallard-duck-theme {
+  --primary-dark: #00574B;    /* Deep Green Head */
+  --primary-light: #FFC107;  /* Yellow Bill */
+  --secondary-light: #BDBDBD;/* Grey Body */
+}
+
+/* Loon Theme */
+body.loon-theme {
+  --primary-dark: #212121;    /* Black Head */
+  --primary-light: #888888;  /* White Neck */
+  --secondary-light: #9E9E9E;/* Grey Checkered Back */
+}
+
+/* Painted Bunting Theme */
+body.painted-bunting-theme {
+  --primary-dark: #0D47A1;    /* Deep Blue Head */
+  --primary-light: #F44336;  /* Vibrant Red Belly */
+  --secondary-light: #8BC34A;/* Green Back */
+}
+
+/* Lazuli Bunting Theme */
+body.lazuli-bunting-theme {
+  --primary-dark: #0097A7;    /* Turquoise Head */
+  --primary-light: #FB8C00;  /* Cinnamon Breast */
+  --secondary-light: #FAFAFA;/* White Belly */
+}
+
 // Global styles
 app-root {
   display: block;
