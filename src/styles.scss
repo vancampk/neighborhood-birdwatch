@@ -71,7 +71,7 @@ body {
   padding: 0;
   /* Remove default body padding */
   color: rgb(255, 255, 255);
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Roboto';
 }
 
 .app-container {
@@ -126,7 +126,6 @@ h2, h3, h4{
 
 // Containers
 .page-container {
-  font-family: Arial, sans-serif;
   align-items: center;
   align-content: center;
   text-align: center;
@@ -153,7 +152,7 @@ h2, h3, h4{
   border-color: red;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }
 
 .data-point {
     padding: 10px;
