@@ -49,7 +49,7 @@ export const GET_DETECTIONS_FOR_STATION = gql`
   }
 `;
 
-export const GET_LAST_DETEACTION_FOR_STATION = gql`
+export const GET_LAST_DETECTION_FOR_STATION = gql`
   query detections($stationIds: [ID!]) {
     detections(stationIds: $stationIds, last:5) {
         speciesCount

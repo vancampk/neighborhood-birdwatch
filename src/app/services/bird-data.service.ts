@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, map, BehaviorSubject, of, tap, Subscription } from 'rxjs';
 import { Apollo } from 'apollo-angular';
-import {  GET_DETECTIONS_FOR_STATION, GET_LAST_DETEACTION_FOR_STATION, GET_NEARBY_STATIONS, GET_STATION_BY_ID } from '../queries/graphql.queries';
+import {  GET_DETECTIONS_FOR_STATION, GET_LAST_DETECTION_FOR_STATION, GET_NEARBY_STATIONS, GET_STATION_BY_ID } from '../queries/graphql.queries';
 import { Station, DetectionConnection, Detection } from '../models/graphql.models';
 import { DETECTION_SUBSCRIPTION } from '../queries/graphql.subscriptions';
 
@@ -68,7 +68,7 @@ export class BirdDataService {
   getDetectionsForStations(stationIds: number[], last: boolean): Observable<Detection[]> {
     console.log("Getting Detections for Stations: " + stationIds.join(', '));
 
-    const query = last ? GET_LAST_DETEACTION_FOR_STATION : GET_DETECTIONS_FOR_STATION;
+    const query = last ? GET_LAST_DETECTION_FOR_STATION : GET_DETECTIONS_FOR_STATION;
 
     // GraphQL expects station IDs as strings.
     const stationIdStrings = stationIds.map(id => id.toString());
