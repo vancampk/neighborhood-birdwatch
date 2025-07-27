@@ -1,4 +1,27 @@
 <div class="global-controls-container">
+  <!-- Home Button -->
+   <button
+    mat-fab
+    [disabled]="menuOpen"
+    class="control-btn"
+   [routerLink]="['/']"
+    aria-label="Home"
+    matTooltip="Home">
+    <mat-icon>home</mat-icon>
+  </button>
+
+  <!-- Favorites Button -->
+   <button
+    mat-fab
+    [disabled]="menuOpen"
+    class="control-btn"
+   [routerLink]="['favorites']"
+    aria-label="Favorites"
+    matTooltip="Favorites">
+    <mat-icon>star</mat-icon>
+  </button>
+ 
+
   <!-- Settings Button -->
   <button
     mat-fab

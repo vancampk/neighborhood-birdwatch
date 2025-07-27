@@ -8,12 +8,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { LocationService } from '../../services/location.service';
 import { LocationSelectorComponent } from '../location-selector/location-selector.component';
 import { SettingsPanelComponent } from '../settings/settings-panel.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-global-controls',
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
