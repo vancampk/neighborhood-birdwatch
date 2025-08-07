@@ -22,6 +22,7 @@
     "@angular/router": "^20.0.0",
     "@apollo/client": "^3.13.8",
     "@fortawesome/angular-fontawesome": "^2.0.1",
+    "angular-auth-oidc-client": "^19.0.2",
     "angular-fontawesome": "^1.0.0",
     "apollo-angular": "^11.0.0",
     "apollo-link-ws": "^1.0.20",
