@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { GlobalControlsComponent } from './components/global-controls/global-controls.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [App],
@@ -23,6 +24,7 @@ import { GlobalControlsComponent } from './components/global-controls/global-con
     MatIconModule,
     MatSidenavModule,
     GlobalControlsComponent,
+    OAuthModule.forRoot()
   ],
   exports: [App, CommonModule, FontAwesomeModule],
   providers: [provideBrowserGlobalErrorListeners()],
